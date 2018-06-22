@@ -1,11 +1,33 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-//from utils
-const {getUserId, createToken, getUserId} = require('../../utils')
+
+function getUserId(ctx, jwtToken) {
+  let token = null;
+  if(jwtToken) {
+    token = jwtToken
+  } else {
+    const Authorization = ctx.request.get('Authorization')
+    token = Authorization.replace('Bearer ', '')
+  }
+  
+  if (token) { 
+    const { userId } = jwt.verify(token, process.env.APP_SECRET)
+    return userId
+  }
+
+  throw new AuthError()
+}
+
+function createToken(userId) {
+  //console.log('Create token userId =  ', userId)
+  return jwt.sign({ userId, expiresIn: "7d" }, process.env.APP_SECRET)
+}
 
 const auth = {
   async refreshToken(parent, { token }, ctx, info) {
-    const userId = getUserId(token)
+    console.log('27..')
+    const userId = getUserId(ctx, token)
+    console.log('29 userId = ', userId)
     //if no errors, we can sign our token
     return createToken(userId)
   },
@@ -20,7 +42,6 @@ const auth = {
       user,
     }
   },
-
   async login(parent, { email, password }, ctx, info) {
     const user = await ctx.db.query.user({ where: { email } })
     if (!user) {
@@ -45,10 +66,13 @@ const auth = {
         }
       }
     }
-
+    // console.log("line 67, user.id = ", user.id);
+    // console.log("line 68, userId = ", userId);
+    // const letSee = createToken(user.id)
+    // console.log("letSee: ", letSee)
     return {
       //Can't just return token and user, need to wrap in payload
-      //for error message display on client.
+      //for error message display on client.  
       payload: {
         token: createToken(user.id),
         user,

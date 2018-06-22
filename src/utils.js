@@ -1,9 +1,15 @@
 const jwt = require('jsonwebtoken')
 
-function getUserId(ctx) {
-  const Authorization = ctx.request.get('Authorization')
-  if (Authorization) {
-    const token = Authorization.replace('Bearer ', '')
+function getUserId(ctx, jwtToken) {
+  let token = '';
+  if(jwtToken) {
+    token = jwtToken
+  } else {
+    const Authorization = ctx.request.get('Authorization')
+    token = Authorization.replace('Bearer ', '')
+  }
+  
+  if (token) { 
     const { userId } = jwt.verify(token, process.env.APP_SECRET)
     return userId
   }
