@@ -11,6 +11,10 @@ function getUserId(ctx) {
   throw new AuthError()
 }
 
+function createToken(userId) {
+  jwt.sign({ userId, expiresIn: "7d" }, process.env.APP_SECRET)
+}
+
 class AuthError extends Error {
   constructor() {
     super('Not authorized')

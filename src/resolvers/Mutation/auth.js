@@ -1,7 +1,14 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
+//from utils
+const {getUserId, createToken, getUserId} = require('../../utils')
 
 const auth = {
+  async refreshToken(parent, { token }, ctx, info) {
+    const userId = getUserId(token)
+    //if no errors, we can sign our token
+    return createToken(userId)
+  },
   async signup(parent, args, ctx, info) {
     const password = await bcrypt.hash(args.password, 10)
     const user = await ctx.db.mutation.createUser({
@@ -9,7 +16,7 @@ const auth = {
     })
 
     return {
-      token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+      token: createToken(user.id),
       user,
     }
   },
@@ -43,7 +50,7 @@ const auth = {
       //Can't just return token and user, need to wrap in payload
       //for error message display on client.
       payload: {
-        token: jwt.sign({ userId: user.id }, process.env.APP_SECRET),
+        token: createToken(user.id),
         user,
       }
     }
