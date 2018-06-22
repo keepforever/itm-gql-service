@@ -1,5 +1,15 @@
 #### PRISMA_ENDPOINT_OLD="https://us1.prisma.sh/public-battledolphin-946/itm-adv-server/dev"
 
+#### Remeber when deploying to ziet now, need to flag .env
+
+```sh
+now --public --dotenv=.env
+```
+
+#### To remove old deployment; limted free tier cleanup
+```sh
+now rm itm-adv-server --safe --yes
+```
 
 <h1 align="center"><strong>Boilerplate for an Advanced GraphQL Server</strong></h1>
 
