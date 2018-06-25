@@ -6,7 +6,7 @@ now --public --dotenv=.env
 #### Process for adding a new type
 Update the following files:
 
-1. src/schema.graphql: update type Query and type Mutation with whatever is appropriate for the added type.  For example, offers need to be both created by users and retrieved, thus they need:
+1. **src/schema.graphql**: update type Query and type Mutation with whatever is appropriate for the added type.  For example, offers need to be both created by users and retrieved, thus they need:
 ```
 type Query {
   offer(id: ID!): Offer
@@ -17,9 +17,9 @@ type Mutation {
   deleteOffer(id: ID!): Offer!
 }
 ```
-2. src/resolvers/Mutation: Need to add a mutations file with the needed functionality (i.e. post, update, delete).  See "offer.js".
+2. **src/resolvers/Mutation**: Need to add a mutations file with the needed functionality (i.e. post, update, delete).  See "offer.js".
 
-3. src/resolvers/index: Need to collect all mutations for export as follows:
+3. **src/resolvers/index**: Need to collect all mutations for export as follows:
 
 ```
 const { Query } = require('./Query')
@@ -40,14 +40,14 @@ module.exports = {
   AuthPayload,
 }
 ```
-4. src/resolvers/Query.js: Add to Query object:
+4. **src/resolvers/Query.js**: Add to Query object:
 ```
 offer(parent, { id }, ctx, info) {
   return ctx.db.query.post({ where: { id }, info })
 }
 ```
 
-5. src/database/datamodel.graphql: Must add offer type here to tell Prisma to make room for it in the database and create the relations
+5. **src/database/datamodel.graphql**: Must add offer type here to tell Prisma to make room for it in the database and create the relations
 
 ```
 type Offer {
@@ -64,8 +64,8 @@ type Offer {
 ```sh
 prisma deploy
 ```
-which should update the backend with new defs and relations
-src/generated/prisma.graphql should auto-update as a result. 
+This should update the backend with new defs and relations
+src/generated/prisma.graphql should auto-update as a result.
 
 
 #### To remove old deployment; limited free tier cleanup
