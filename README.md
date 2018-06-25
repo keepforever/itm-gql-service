@@ -73,6 +73,8 @@ src/generated/prisma.graphql should auto-update as a result.
 now rm itm-adv-server --safe --yes
 ```
 
+# EVERYTHING BELOW THIS LINE IS FROM THE README THAT CAME WITH THE BOILERPLATE CODE
+
 <h1 align="center"><strong>Boilerplate for an Advanced GraphQL Server</strong></h1>
 
 <br />
