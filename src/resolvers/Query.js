@@ -28,7 +28,7 @@ const Query = {
   },
 
   offer(parent, { id }, ctx, info) {
-    return ctx.db.query.offer({ where: { id }, info })
+    return ctx.db.query.post({ where: { id }, info })
   }
 }
 
