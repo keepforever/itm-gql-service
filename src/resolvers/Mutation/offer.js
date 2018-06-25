@@ -31,4 +31,4 @@ const offer = {
   },
 }
 
-module.exports = { post }
+module.exports = { offer }

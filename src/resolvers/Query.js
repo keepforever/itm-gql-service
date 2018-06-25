@@ -26,6 +26,10 @@ const Query = {
     const id = getUserId(ctx)
     return ctx.db.query.user({ where: { id } }, info)
   },
+
+  offer(parent, { id }, ctx, info) {
+    return ctx.db.query.post({ where: { id }, info })
+  }
 }
 
 module.exports = { Query }
