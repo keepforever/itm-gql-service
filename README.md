@@ -1,12 +1,74 @@
-#### PRISMA_ENDPOINT_OLD="https://us1.prisma.sh/public-battledolphin-946/itm-adv-server/dev"
-
 #### Remeber when deploying to ziet now, need to flag .env
 
 ```sh
 now --public --dotenv=.env
 ```
+#### Process for adding a new type
+Update the following files:
 
-#### To remove old deployment; limted free tier cleanup
+1. src/schema.graphql: update type Query and type Mutation with whatever is appropriate for the added type.  For example, offers need to be both created by users and retrieved, thus they need:
+```
+type Query {
+  offer(id: ID!): Offer
+}
+
+type Mutation {
+  createOffer(title: String!, text: String!): Offer!
+  deleteOffer(id: ID!): Offer!
+}
+```
+2. src/resolvers/Mutation: Need to add a mutations file with the needed functionality (i.e. post, update, delete).  See "offer.js".
+
+3. src/resolvers/index: Need to collect all mutations for export as follows:
+
+```
+const { Query } = require('./Query')
+const { Subscription } = require('./Subscription')
+const { auth } = require('./Mutation/auth')
+const { post } = require('./Mutation/post')
+const { offer } = require('./Mutation/offer')
+const { AuthPayload } = require('./AuthPayload')
+
+module.exports = {
+  Query,
+  Mutation: {
+    ...auth,
+    ...post,
+    ...offer,
+  },
+  Subscription,
+  AuthPayload,
+}
+```
+4. src/resolvers/Query.js: Add to Query object:
+```
+offer(parent, { id }, ctx, info) {
+  return ctx.db.query.post({ where: { id }, info })
+}
+```
+
+5. src/database/datamodel.graphql: Must add offer type here to tell Prisma to make room for it in the database and create the relations
+
+```
+type Offer {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  title: String!
+  text: String!
+  author: User!
+}
+```
+
+6. Finally when this is all done, from the root, run:
+```sh
+prisma deploy
+```
+which should update the backend with new defs and relations
+src/generated/prisma.graphql should auto-update as a result. 
+
+
+#### To remove old deployment; limited free tier cleanup
 ```sh
 now rm itm-adv-server --safe --yes
 ```
