@@ -1,4 +1,5 @@
 # import Post from "./generated/prisma.graphql"
+# import Offer from "./generated/prisma.graphql"
 
 type Query {
   feed: [Post!]!
@@ -14,6 +15,8 @@ type Mutation {
   createDraft(title: String!, text: String!): Post!
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
+  createOffer(title: String!, text: String!): Offer!
+  deleteOffer(id: ID!): Offer!
 }
 
 type Subscription {
