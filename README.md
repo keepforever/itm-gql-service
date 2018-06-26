@@ -3,6 +3,10 @@
 ```sh
 now --public --dotenv=.env
 ```
+#### To remove old deployment; limited free tier cleanup
+```sh
+now rm itm-adv-server --safe --yes
+```
 #### Process for adding a new type
 Update the following files:
 
@@ -66,12 +70,6 @@ prisma deploy
 ```
 This should update the backend with new defs and relations
 src/generated/prisma.graphql should auto-update as a result.
-
-
-#### To remove old deployment; limited free tier cleanup
-```sh
-now rm itm-adv-server --safe --yes
-```
 
 # EVERYTHING BELOW THIS LINE IS FROM THE README THAT CAME WITH THE BOILERPLATE CODE
 
