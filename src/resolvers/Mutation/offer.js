@@ -3,7 +3,7 @@ const { getUserId } = require('../../utils')
 const offer = {
   async createOffer(parent, { title, text }, ctx, info) {
     const userId = getUserId(ctx)
-    return ctx.db.mutation.createPost(
+    return ctx.db.mutation.createOffer(
       {
         data: {
           title,
