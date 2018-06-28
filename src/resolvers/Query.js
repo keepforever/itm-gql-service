@@ -1,6 +1,9 @@
+const { forwardTo } = require('prisma-binding')
 const { getUserId } = require('../utils')
 
 const Query = {
+  offers: forwardTo("db"),
+  
   feed(parent, args, ctx, info) {
     return ctx.db.query.posts({ where: { isPublished: true } }, info)
   },
@@ -29,6 +32,7 @@ const Query = {
 
   offer(parent, { id }, ctx, info) {
     return ctx.db.query.offer({ where: { id }, info })
+
   }
 }
 
