@@ -1,22 +1,6 @@
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
-
-function getUserId(ctx, jwtToken) {
-  let token = null;
-  if(jwtToken) {
-    token = jwtToken
-  } else {
-    const Authorization = ctx.request.get('Authorization')
-    token = Authorization.replace('Bearer ', '')
-  }
-  
-  if (token) { 
-    const { userId } = jwt.verify(token, process.env.APP_SECRET)
-    return userId
-  }
-
-  throw new AuthError()
-}
+const { getUserId } = require('../../utils')
 
 function createToken(userId) {
   //console.log('Create token userId =  ', userId)
@@ -25,9 +9,9 @@ function createToken(userId) {
 
 const auth = {
   async refreshToken(parent, { token }, ctx, info) {
-    console.log('27..')
+
     const userId = getUserId(ctx, token)
-    console.log('29 userId = ', userId)
+    console.log('Mutation/auth.js, userId = ', userId)
     //if no errors, we can sign our token
     return createToken(userId)
   },
@@ -72,7 +56,7 @@ const auth = {
     // console.log("letSee: ", letSee)
     return {
       //Can't just return token and user, need to wrap in payload
-      //for error message display on client.  
+      //for error message display on client.
       payload: {
         token: createToken(user.id),
         user,
@@ -82,3 +66,21 @@ const auth = {
 }
 
 module.exports = { auth }
+
+
+// function getUserId(ctx, jwtToken) {
+//   let token = null;
+//   if(jwtToken) {
+//     token = jwtToken
+//   } else {
+//     const Authorization = ctx.request.get('Authorization')
+//     token = Authorization.replace('Bearer ', '')
+//   }
+//
+//   if (token) {
+//     const { userId } = jwt.verify(token, process.env.APP_SECRET)
+//     return userId
+//   }
+//
+//   throw new AuthError()
+// }
