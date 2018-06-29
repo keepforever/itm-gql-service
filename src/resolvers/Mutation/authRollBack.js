@@ -24,13 +24,12 @@ function createToken(userId) {
 }
 
 const auth = {
-  async refreshToken(parent, args, ctx, info) {
-    const userId = getUserId(ctx)
+  async refreshToken(parent, { token }, ctx, info) {
+    console.log('27..')
+    const userId = getUserId(ctx, token)
+    console.log('29 userId = ', userId)
     //if no errors, we can sign our token
-    return {
-      token: createToken(userId),
-      userId,
-    }
+    return createToken(userId)
   },
   async signup(parent, args, ctx, info) {
     const password = await bcrypt.hash(args.password, 10)
