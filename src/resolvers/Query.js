@@ -3,8 +3,9 @@ const { getUserId } = require('../utils')
 
 const Query = {
   offers: forwardTo("db"),
-  
+
   feed(parent, args, ctx, info) {
+    console.log("feed query called")
     return ctx.db.query.posts({ where: { isPublished: true } }, info)
   },
 

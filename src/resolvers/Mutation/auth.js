@@ -2,6 +2,7 @@ const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 
 function getUserId(ctx, jwtToken) {
+  console.log("getUserId called!")
   let token = null;
   if(jwtToken) {
     token = jwtToken
