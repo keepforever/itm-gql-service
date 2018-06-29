@@ -8,12 +8,15 @@ function createToken(userId) {
 }
 
 const auth = {
-  async refreshToken(parent, { token }, ctx, info) {
+  async refreshToken(parent, args, ctx, info) {
 
-    const userId = getUserId(ctx, token)
+    const userId = getUserId(ctx)
     console.log('Mutation/auth.js, userId = ', userId)
     //if no errors, we can sign our token
-    return createToken(userId)
+    return {
+      token: createToken(userId),
+      userId,
+    }
   },
   async signup(parent, args, ctx, info) {
     const password = await bcrypt.hash(args.password, 10)

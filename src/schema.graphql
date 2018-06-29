@@ -10,8 +10,13 @@ type Query {
   offer(id: ID!): Offer
 }
 
+type RefreshTokenPayload {
+  token: String!
+  userId: String!
+}
+
 type Mutation {
-  refreshToken(token: String!): String!
+  refreshToken: RefreshTokenPayload!
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): LoginResponse!
   createDraft(title: String!, text: String!): Post!
