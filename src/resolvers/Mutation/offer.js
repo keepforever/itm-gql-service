@@ -1,6 +1,30 @@
 const { getUserId } = require('../../utils')
 
 const offer = {
+  async updateOffer(parent, {title, text, id}, ctx, info ) {
+    //console.log("Id from offer.js, ", id)
+    const userId = getUserId(ctx)
+    const offer = await ctx.db.query.offer(
+      { where: { id }}, '{ id text title author { name id } }'
+    )
+    //console.log('offer.author from offer.js', offer.author.id)
+    if (userId !== offer.author.id) {
+      throw new Error ("Error: you are not the author of this offer")
+    }
+    return ctx.db.mutation.updateOffer(
+      {
+        data: {
+          title,
+          text,
+        },
+        where: {
+          id
+        }
+      },
+      info
+    )
+  },
+
   async createOffer(parent, { title, text }, ctx, info) {
     const userId = getUserId(ctx)
     console.log('offer.js, userId: ', userId)

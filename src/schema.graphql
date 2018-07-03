@@ -24,6 +24,7 @@ type Mutation {
   deletePost(id: ID!): Post!
   createOffer(title: String!, text: String!): Offer!
   deleteOffer(id: ID!): Offer!
+  updateOffer(id: ID!, title: String, text: String): Offer
 }
 
 type Subscription {
