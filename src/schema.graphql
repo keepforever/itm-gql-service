@@ -1,5 +1,6 @@
 # import Post, Offer from "./generated/prisma.graphql"
 # import OfferWhereInput, OfferOrderByInput from "./generated/prisma.graphql"
+# import OfferWhereUniqueInput from "./generated/prisma.graphql"
 
 type Query {
   offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
@@ -23,7 +24,7 @@ type Mutation {
   publish(id: ID!): Post!
   deletePost(id: ID!): Post!
   createOffer(title: String!, text: String!): Offer!
-  deleteOffer(id: ID!): Offer!
+  deleteOffer(where: OfferWhereUniqueInput!): Offer
   updateOffer(id: ID!, title: String, text: String): Offer
 }
 
