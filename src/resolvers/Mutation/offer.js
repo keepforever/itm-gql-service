@@ -7,7 +7,7 @@ const offer = {
     //console.log("Id from offer.js, ", id)
     const userId = getUserId(ctx)
     const offer = await ctx.db.query.offer(
-      { where: { id }}, '{ id text title author { name id } }'
+      { where: { id }}, '{ __typename id text title author { name id } }'
     )
     //console.log('offer.author from offer.js', offer.author.id)
     if (userId !== offer.author.id) {
