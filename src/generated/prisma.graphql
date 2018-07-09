@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/brian-cilenti-1f9206/prisma-junk/dev
-# timestamp: Sun Jun 24 2018 22:03:51 GMT-0700 (Pacific Daylight Time)
+# timestamp: Mon Jul 09 2018 14:27:27 GMT-0700 (Pacific Daylight Time)
 
 type AggregateOffer {
   count: Int!
@@ -10,6 +10,26 @@ type AggregatePost {
 }
 
 type AggregateUser {
+  count: Int!
+}
+
+type AggregateZfriendship {
+  count: Int!
+}
+
+type AggregateZoffer {
+  count: Int!
+}
+
+type AggregateZrequest {
+  count: Int!
+}
+
+type AggregateZseller {
+  count: Int!
+}
+
+type AggregateZuser {
   count: Int!
 }
 
@@ -28,23 +48,53 @@ scalar Long
 
 type Mutation {
   createPost(data: PostCreateInput!): Post!
-  createOffer(data: OfferCreateInput!): Offer!
+  createZoffer(data: ZofferCreateInput!): Zoffer!
+  createZrequest(data: ZrequestCreateInput!): Zrequest!
+  createZfriendship(data: ZfriendshipCreateInput!): Zfriendship!
+  createZseller(data: ZsellerCreateInput!): Zseller!
   createUser(data: UserCreateInput!): User!
+  createOffer(data: OfferCreateInput!): Offer!
+  createZuser(data: ZuserCreateInput!): Zuser!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
-  updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
+  updateZoffer(data: ZofferUpdateInput!, where: ZofferWhereUniqueInput!): Zoffer
+  updateZrequest(data: ZrequestUpdateInput!, where: ZrequestWhereUniqueInput!): Zrequest
+  updateZfriendship(data: ZfriendshipUpdateInput!, where: ZfriendshipWhereUniqueInput!): Zfriendship
+  updateZseller(data: ZsellerUpdateInput!, where: ZsellerWhereUniqueInput!): Zseller
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
+  updateZuser(data: ZuserUpdateInput!, where: ZuserWhereUniqueInput!): Zuser
   deletePost(where: PostWhereUniqueInput!): Post
-  deleteOffer(where: OfferWhereUniqueInput!): Offer
+  deleteZoffer(where: ZofferWhereUniqueInput!): Zoffer
+  deleteZrequest(where: ZrequestWhereUniqueInput!): Zrequest
+  deleteZfriendship(where: ZfriendshipWhereUniqueInput!): Zfriendship
+  deleteZseller(where: ZsellerWhereUniqueInput!): Zseller
   deleteUser(where: UserWhereUniqueInput!): User
+  deleteOffer(where: OfferWhereUniqueInput!): Offer
+  deleteZuser(where: ZuserWhereUniqueInput!): Zuser
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
-  upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
+  upsertZoffer(where: ZofferWhereUniqueInput!, create: ZofferCreateInput!, update: ZofferUpdateInput!): Zoffer!
+  upsertZrequest(where: ZrequestWhereUniqueInput!, create: ZrequestCreateInput!, update: ZrequestUpdateInput!): Zrequest!
+  upsertZfriendship(where: ZfriendshipWhereUniqueInput!, create: ZfriendshipCreateInput!, update: ZfriendshipUpdateInput!): Zfriendship!
+  upsertZseller(where: ZsellerWhereUniqueInput!, create: ZsellerCreateInput!, update: ZsellerUpdateInput!): Zseller!
   upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
+  upsertZuser(where: ZuserWhereUniqueInput!, create: ZuserCreateInput!, update: ZuserUpdateInput!): Zuser!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
-  updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
+  updateManyZoffers(data: ZofferUpdateInput!, where: ZofferWhereInput): BatchPayload!
+  updateManyZrequests(data: ZrequestUpdateInput!, where: ZrequestWhereInput): BatchPayload!
+  updateManyZfriendships(data: ZfriendshipUpdateInput!, where: ZfriendshipWhereInput): BatchPayload!
+  updateManyZsellers(data: ZsellerUpdateInput!, where: ZsellerWhereInput): BatchPayload!
   updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
+  updateManyZusers(data: ZuserUpdateInput!, where: ZuserWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
-  deleteManyOffers(where: OfferWhereInput): BatchPayload!
+  deleteManyZoffers(where: ZofferWhereInput): BatchPayload!
+  deleteManyZrequests(where: ZrequestWhereInput): BatchPayload!
+  deleteManyZfriendships(where: ZfriendshipWhereInput): BatchPayload!
+  deleteManyZsellers(where: ZsellerWhereInput): BatchPayload!
   deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyOffers(where: OfferWhereInput): BatchPayload!
+  deleteManyZusers(where: ZuserWhereInput): BatchPayload!
 }
 
 enum MutationType {
@@ -82,6 +132,11 @@ input OfferCreateInput {
   title: String!
   text: String!
   author: UserCreateOneInput!
+}
+
+input OfferCreateManyInput {
+  create: [OfferCreateInput!]
+  connect: [OfferWhereUniqueInput!]
 }
 
 """An edge in a connection."""
@@ -153,10 +208,36 @@ input OfferSubscriptionWhereInput {
   node: OfferWhereInput
 }
 
+input OfferUpdateDataInput {
+  title: String
+  text: String
+  author: UserUpdateOneInput
+}
+
 input OfferUpdateInput {
   title: String
   text: String
   author: UserUpdateOneInput
+}
+
+input OfferUpdateManyInput {
+  create: [OfferCreateInput!]
+  connect: [OfferWhereUniqueInput!]
+  disconnect: [OfferWhereUniqueInput!]
+  delete: [OfferWhereUniqueInput!]
+  update: [OfferUpdateWithWhereUniqueNestedInput!]
+  upsert: [OfferUpsertWithWhereUniqueNestedInput!]
+}
+
+input OfferUpdateWithWhereUniqueNestedInput {
+  where: OfferWhereUniqueInput!
+  data: OfferUpdateDataInput!
+}
+
+input OfferUpsertWithWhereUniqueNestedInput {
+  where: OfferWhereUniqueInput!
+  update: OfferUpdateDataInput!
+  create: OfferCreateInput!
 }
 
 input OfferWhereInput {
@@ -333,6 +414,9 @@ input OfferWhereInput {
   """All values not ending with the given string."""
   text_not_ends_with: String
   author: UserWhereInput
+  _MagicalBackRelation_OfferToZuser_every: ZuserWhereInput
+  _MagicalBackRelation_OfferToZuser_some: ZuserWhereInput
+  _MagicalBackRelation_OfferToZuser_none: ZuserWhereInput
 }
 
 input OfferWhereUniqueInput {
@@ -683,14 +767,29 @@ input PostWhereUniqueInput {
 
 type Query {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
-  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
+  zoffers(where: ZofferWhereInput, orderBy: ZofferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zoffer]!
+  zrequests(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zrequest]!
+  zfriendships(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zfriendship]!
+  zsellers(where: ZsellerWhereInput, orderBy: ZsellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zseller]!
   users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
+  zusers(where: ZuserWhereInput, orderBy: ZuserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zuser]!
   post(where: PostWhereUniqueInput!): Post
-  offer(where: OfferWhereUniqueInput!): Offer
+  zoffer(where: ZofferWhereUniqueInput!): Zoffer
+  zrequest(where: ZrequestWhereUniqueInput!): Zrequest
+  zfriendship(where: ZfriendshipWhereUniqueInput!): Zfriendship
+  zseller(where: ZsellerWhereUniqueInput!): Zseller
   user(where: UserWhereUniqueInput!): User
+  offer(where: OfferWhereUniqueInput!): Offer
+  zuser(where: ZuserWhereUniqueInput!): Zuser
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
-  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
+  zoffersConnection(where: ZofferWhereInput, orderBy: ZofferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZofferConnection!
+  zrequestsConnection(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZrequestConnection!
+  zfriendshipsConnection(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZfriendshipConnection!
+  zsellersConnection(where: ZsellerWhereInput, orderBy: ZsellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZsellerConnection!
   usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
+  zusersConnection(where: ZuserWhereInput, orderBy: ZuserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZuserConnection!
 
   """Fetches an object given its ID"""
   node(
@@ -701,8 +800,13 @@ type Query {
 
 type Subscription {
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
-  offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
+  zoffer(where: ZofferSubscriptionWhereInput): ZofferSubscriptionPayload
+  zrequest(where: ZrequestSubscriptionWhereInput): ZrequestSubscriptionPayload
+  zfriendship(where: ZfriendshipSubscriptionWhereInput): ZfriendshipSubscriptionPayload
+  zseller(where: ZsellerSubscriptionWhereInput): ZsellerSubscriptionPayload
   user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
+  zuser(where: ZuserSubscriptionWhereInput): ZuserSubscriptionPayload
 }
 
 type User implements Node {
@@ -1040,6 +1144,1807 @@ input UserWhereInput {
 }
 
 input UserWhereUniqueInput {
+  id: ID
+  email: String
+}
+
+type Zfriendship implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  friendsBecause: [String!]!
+  offerAllowance: Int!
+  friend(where: ZsellerWhereInput): Zseller!
+}
+
+"""A connection to a list of items."""
+type ZfriendshipConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ZfriendshipEdge]!
+  aggregate: AggregateZfriendship!
+}
+
+input ZfriendshipCreatefriendsBecauseInput {
+  set: [String!]
+}
+
+input ZfriendshipCreateInput {
+  offerAllowance: Int
+  friendsBecause: ZfriendshipCreatefriendsBecauseInput
+  friend: ZsellerCreateOneInput!
+}
+
+input ZfriendshipCreateManyInput {
+  create: [ZfriendshipCreateInput!]
+  connect: [ZfriendshipWhereUniqueInput!]
+}
+
+"""An edge in a connection."""
+type ZfriendshipEdge {
+  """The item at the end of the edge."""
+  node: Zfriendship!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ZfriendshipOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  offerAllowance_ASC
+  offerAllowance_DESC
+}
+
+type ZfriendshipPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  friendsBecause: [String!]!
+  offerAllowance: Int!
+}
+
+type ZfriendshipSubscriptionPayload {
+  mutation: MutationType!
+  node: Zfriendship
+  updatedFields: [String!]
+  previousValues: ZfriendshipPreviousValues
+}
+
+input ZfriendshipSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ZfriendshipSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ZfriendshipSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ZfriendshipSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ZfriendshipWhereInput
+}
+
+input ZfriendshipUpdateDataInput {
+  offerAllowance: Int
+  friendsBecause: ZfriendshipUpdatefriendsBecauseInput
+  friend: ZsellerUpdateOneInput
+}
+
+input ZfriendshipUpdatefriendsBecauseInput {
+  set: [String!]
+}
+
+input ZfriendshipUpdateInput {
+  offerAllowance: Int
+  friendsBecause: ZfriendshipUpdatefriendsBecauseInput
+  friend: ZsellerUpdateOneInput
+}
+
+input ZfriendshipUpdateManyInput {
+  create: [ZfriendshipCreateInput!]
+  connect: [ZfriendshipWhereUniqueInput!]
+  disconnect: [ZfriendshipWhereUniqueInput!]
+  delete: [ZfriendshipWhereUniqueInput!]
+  update: [ZfriendshipUpdateWithWhereUniqueNestedInput!]
+  upsert: [ZfriendshipUpsertWithWhereUniqueNestedInput!]
+}
+
+input ZfriendshipUpdateWithWhereUniqueNestedInput {
+  where: ZfriendshipWhereUniqueInput!
+  data: ZfriendshipUpdateDataInput!
+}
+
+input ZfriendshipUpsertWithWhereUniqueNestedInput {
+  where: ZfriendshipWhereUniqueInput!
+  update: ZfriendshipUpdateDataInput!
+  create: ZfriendshipCreateInput!
+}
+
+input ZfriendshipWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ZfriendshipWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ZfriendshipWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ZfriendshipWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  offerAllowance: Int
+
+  """All values that are not equal to given value."""
+  offerAllowance_not: Int
+
+  """All values that are contained in given list."""
+  offerAllowance_in: [Int!]
+
+  """All values that are not contained in given list."""
+  offerAllowance_not_in: [Int!]
+
+  """All values less than the given value."""
+  offerAllowance_lt: Int
+
+  """All values less than or equal the given value."""
+  offerAllowance_lte: Int
+
+  """All values greater than the given value."""
+  offerAllowance_gt: Int
+
+  """All values greater than or equal the given value."""
+  offerAllowance_gte: Int
+  friend: ZsellerWhereInput
+  _MagicalBackRelation_ZfriendshipToZuser_every: ZuserWhereInput
+  _MagicalBackRelation_ZfriendshipToZuser_some: ZuserWhereInput
+  _MagicalBackRelation_ZfriendshipToZuser_none: ZuserWhereInput
+}
+
+input ZfriendshipWhereUniqueInput {
+  id: ID
+}
+
+type Zoffer implements Node {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  expiresAt: DateTime!
+  title: String!
+  text: String!
+  author(where: ZsellerWhereInput): Zseller!
+}
+
+"""A connection to a list of items."""
+type ZofferConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ZofferEdge]!
+  aggregate: AggregateZoffer!
+}
+
+input ZofferCreateInput {
+  expiresAt: DateTime!
+  title: String!
+  text: String!
+  author: ZsellerCreateOneInput!
+}
+
+"""An edge in a connection."""
+type ZofferEdge {
+  """The item at the end of the edge."""
+  node: Zoffer!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ZofferOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  expiresAt_ASC
+  expiresAt_DESC
+  title_ASC
+  title_DESC
+  text_ASC
+  text_DESC
+}
+
+type ZofferPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  expiresAt: DateTime!
+  title: String!
+  text: String!
+}
+
+type ZofferSubscriptionPayload {
+  mutation: MutationType!
+  node: Zoffer
+  updatedFields: [String!]
+  previousValues: ZofferPreviousValues
+}
+
+input ZofferSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ZofferSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ZofferSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ZofferSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ZofferWhereInput
+}
+
+input ZofferUpdateInput {
+  expiresAt: DateTime
+  title: String
+  text: String
+  author: ZsellerUpdateOneInput
+}
+
+input ZofferWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ZofferWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ZofferWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ZofferWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  expiresAt: DateTime
+
+  """All values that are not equal to given value."""
+  expiresAt_not: DateTime
+
+  """All values that are contained in given list."""
+  expiresAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  expiresAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  expiresAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  expiresAt_lte: DateTime
+
+  """All values greater than the given value."""
+  expiresAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  expiresAt_gte: DateTime
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  author: ZsellerWhereInput
+}
+
+input ZofferWhereUniqueInput {
+  id: ID
+}
+
+type Zrequest implements Node {
+  to(where: ZsellerWhereInput): Zseller!
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  wants: [String!]!
+  title: String!
+  text: String!
+  author(where: ZuserWhereInput): Zuser!
+  isPublished: Boolean!
+}
+
+"""A connection to a list of items."""
+type ZrequestConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ZrequestEdge]!
+  aggregate: AggregateZrequest!
+}
+
+input ZrequestCreateInput {
+  title: String!
+  text: String!
+  isPublished: Boolean
+  wants: ZrequestCreatewantsInput
+  to: ZsellerCreateOneWithoutInboxInput!
+  author: ZuserCreateOneWithoutRequestsInput!
+}
+
+input ZrequestCreateManyWithoutAuthorInput {
+  create: [ZrequestCreateWithoutAuthorInput!]
+  connect: [ZrequestWhereUniqueInput!]
+}
+
+input ZrequestCreateManyWithoutToInput {
+  create: [ZrequestCreateWithoutToInput!]
+  connect: [ZrequestWhereUniqueInput!]
+}
+
+input ZrequestCreatewantsInput {
+  set: [String!]
+}
+
+input ZrequestCreateWithoutAuthorInput {
+  title: String!
+  text: String!
+  isPublished: Boolean
+  wants: ZrequestCreatewantsInput
+  to: ZsellerCreateOneWithoutInboxInput!
+}
+
+input ZrequestCreateWithoutToInput {
+  title: String!
+  text: String!
+  isPublished: Boolean
+  wants: ZrequestCreatewantsInput
+  author: ZuserCreateOneWithoutRequestsInput!
+}
+
+"""An edge in a connection."""
+type ZrequestEdge {
+  """The item at the end of the edge."""
+  node: Zrequest!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ZrequestOrderByInput {
+  id_ASC
+  id_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  title_ASC
+  title_DESC
+  text_ASC
+  text_DESC
+  isPublished_ASC
+  isPublished_DESC
+}
+
+type ZrequestPreviousValues {
+  id: ID!
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  wants: [String!]!
+  title: String!
+  text: String!
+  isPublished: Boolean!
+}
+
+type ZrequestSubscriptionPayload {
+  mutation: MutationType!
+  node: Zrequest
+  updatedFields: [String!]
+  previousValues: ZrequestPreviousValues
+}
+
+input ZrequestSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ZrequestSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ZrequestSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ZrequestSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ZrequestWhereInput
+}
+
+input ZrequestUpdateInput {
+  title: String
+  text: String
+  isPublished: Boolean
+  wants: ZrequestUpdatewantsInput
+  to: ZsellerUpdateOneWithoutInboxInput
+  author: ZuserUpdateOneWithoutRequestsInput
+}
+
+input ZrequestUpdateManyWithoutAuthorInput {
+  create: [ZrequestCreateWithoutAuthorInput!]
+  connect: [ZrequestWhereUniqueInput!]
+  disconnect: [ZrequestWhereUniqueInput!]
+  delete: [ZrequestWhereUniqueInput!]
+  update: [ZrequestUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [ZrequestUpsertWithWhereUniqueWithoutAuthorInput!]
+}
+
+input ZrequestUpdateManyWithoutToInput {
+  create: [ZrequestCreateWithoutToInput!]
+  connect: [ZrequestWhereUniqueInput!]
+  disconnect: [ZrequestWhereUniqueInput!]
+  delete: [ZrequestWhereUniqueInput!]
+  update: [ZrequestUpdateWithWhereUniqueWithoutToInput!]
+  upsert: [ZrequestUpsertWithWhereUniqueWithoutToInput!]
+}
+
+input ZrequestUpdatewantsInput {
+  set: [String!]
+}
+
+input ZrequestUpdateWithoutAuthorDataInput {
+  title: String
+  text: String
+  isPublished: Boolean
+  wants: ZrequestUpdatewantsInput
+  to: ZsellerUpdateOneWithoutInboxInput
+}
+
+input ZrequestUpdateWithoutToDataInput {
+  title: String
+  text: String
+  isPublished: Boolean
+  wants: ZrequestUpdatewantsInput
+  author: ZuserUpdateOneWithoutRequestsInput
+}
+
+input ZrequestUpdateWithWhereUniqueWithoutAuthorInput {
+  where: ZrequestWhereUniqueInput!
+  data: ZrequestUpdateWithoutAuthorDataInput!
+}
+
+input ZrequestUpdateWithWhereUniqueWithoutToInput {
+  where: ZrequestWhereUniqueInput!
+  data: ZrequestUpdateWithoutToDataInput!
+}
+
+input ZrequestUpsertWithWhereUniqueWithoutAuthorInput {
+  where: ZrequestWhereUniqueInput!
+  update: ZrequestUpdateWithoutAuthorDataInput!
+  create: ZrequestCreateWithoutAuthorInput!
+}
+
+input ZrequestUpsertWithWhereUniqueWithoutToInput {
+  where: ZrequestWhereUniqueInput!
+  update: ZrequestUpdateWithoutToDataInput!
+  create: ZrequestCreateWithoutToInput!
+}
+
+input ZrequestWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ZrequestWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ZrequestWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ZrequestWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
+  title: String
+
+  """All values that are not equal to given value."""
+  title_not: String
+
+  """All values that are contained in given list."""
+  title_in: [String!]
+
+  """All values that are not contained in given list."""
+  title_not_in: [String!]
+
+  """All values less than the given value."""
+  title_lt: String
+
+  """All values less than or equal the given value."""
+  title_lte: String
+
+  """All values greater than the given value."""
+  title_gt: String
+
+  """All values greater than or equal the given value."""
+  title_gte: String
+
+  """All values containing the given string."""
+  title_contains: String
+
+  """All values not containing the given string."""
+  title_not_contains: String
+
+  """All values starting with the given string."""
+  title_starts_with: String
+
+  """All values not starting with the given string."""
+  title_not_starts_with: String
+
+  """All values ending with the given string."""
+  title_ends_with: String
+
+  """All values not ending with the given string."""
+  title_not_ends_with: String
+  text: String
+
+  """All values that are not equal to given value."""
+  text_not: String
+
+  """All values that are contained in given list."""
+  text_in: [String!]
+
+  """All values that are not contained in given list."""
+  text_not_in: [String!]
+
+  """All values less than the given value."""
+  text_lt: String
+
+  """All values less than or equal the given value."""
+  text_lte: String
+
+  """All values greater than the given value."""
+  text_gt: String
+
+  """All values greater than or equal the given value."""
+  text_gte: String
+
+  """All values containing the given string."""
+  text_contains: String
+
+  """All values not containing the given string."""
+  text_not_contains: String
+
+  """All values starting with the given string."""
+  text_starts_with: String
+
+  """All values not starting with the given string."""
+  text_not_starts_with: String
+
+  """All values ending with the given string."""
+  text_ends_with: String
+
+  """All values not ending with the given string."""
+  text_not_ends_with: String
+  isPublished: Boolean
+
+  """All values that are not equal to given value."""
+  isPublished_not: Boolean
+  to: ZsellerWhereInput
+  author: ZuserWhereInput
+}
+
+input ZrequestWhereUniqueInput {
+  id: ID
+}
+
+type Zseller implements Node {
+  id: ID!
+  name: String!
+  about: String!
+  email: String!
+  password: String!
+  patrons(where: ZuserWhereInput, orderBy: ZuserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zuser!]
+  sells: [String!]!
+  inbox(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zrequest!]
+}
+
+"""A connection to a list of items."""
+type ZsellerConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ZsellerEdge]!
+  aggregate: AggregateZseller!
+}
+
+input ZsellerCreateInput {
+  name: String!
+  about: String!
+  email: String!
+  password: String!
+  sells: ZsellerCreatesellsInput
+  patrons: ZuserCreateManyInput
+  inbox: ZrequestCreateManyWithoutToInput
+}
+
+input ZsellerCreateOneInput {
+  create: ZsellerCreateInput
+  connect: ZsellerWhereUniqueInput
+}
+
+input ZsellerCreateOneWithoutInboxInput {
+  create: ZsellerCreateWithoutInboxInput
+  connect: ZsellerWhereUniqueInput
+}
+
+input ZsellerCreatesellsInput {
+  set: [String!]
+}
+
+input ZsellerCreateWithoutInboxInput {
+  name: String!
+  about: String!
+  email: String!
+  password: String!
+  sells: ZsellerCreatesellsInput
+  patrons: ZuserCreateManyInput
+}
+
+"""An edge in a connection."""
+type ZsellerEdge {
+  """The item at the end of the edge."""
+  node: Zseller!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ZsellerOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  about_ASC
+  about_DESC
+  email_ASC
+  email_DESC
+  password_ASC
+  password_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ZsellerPreviousValues {
+  id: ID!
+  name: String!
+  about: String!
+  email: String!
+  password: String!
+  sells: [String!]!
+}
+
+type ZsellerSubscriptionPayload {
+  mutation: MutationType!
+  node: Zseller
+  updatedFields: [String!]
+  previousValues: ZsellerPreviousValues
+}
+
+input ZsellerSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ZsellerSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ZsellerSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ZsellerSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ZsellerWhereInput
+}
+
+input ZsellerUpdateDataInput {
+  name: String
+  about: String
+  email: String
+  password: String
+  sells: ZsellerUpdatesellsInput
+  patrons: ZuserUpdateManyInput
+  inbox: ZrequestUpdateManyWithoutToInput
+}
+
+input ZsellerUpdateInput {
+  name: String
+  about: String
+  email: String
+  password: String
+  sells: ZsellerUpdatesellsInput
+  patrons: ZuserUpdateManyInput
+  inbox: ZrequestUpdateManyWithoutToInput
+}
+
+input ZsellerUpdateOneInput {
+  create: ZsellerCreateInput
+  connect: ZsellerWhereUniqueInput
+  delete: Boolean
+  update: ZsellerUpdateDataInput
+  upsert: ZsellerUpsertNestedInput
+}
+
+input ZsellerUpdateOneWithoutInboxInput {
+  create: ZsellerCreateWithoutInboxInput
+  connect: ZsellerWhereUniqueInput
+  delete: Boolean
+  update: ZsellerUpdateWithoutInboxDataInput
+  upsert: ZsellerUpsertWithoutInboxInput
+}
+
+input ZsellerUpdatesellsInput {
+  set: [String!]
+}
+
+input ZsellerUpdateWithoutInboxDataInput {
+  name: String
+  about: String
+  email: String
+  password: String
+  sells: ZsellerUpdatesellsInput
+  patrons: ZuserUpdateManyInput
+}
+
+input ZsellerUpsertNestedInput {
+  update: ZsellerUpdateDataInput!
+  create: ZsellerCreateInput!
+}
+
+input ZsellerUpsertWithoutInboxInput {
+  update: ZsellerUpdateWithoutInboxDataInput!
+  create: ZsellerCreateWithoutInboxInput!
+}
+
+input ZsellerWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ZsellerWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ZsellerWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ZsellerWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  about: String
+
+  """All values that are not equal to given value."""
+  about_not: String
+
+  """All values that are contained in given list."""
+  about_in: [String!]
+
+  """All values that are not contained in given list."""
+  about_not_in: [String!]
+
+  """All values less than the given value."""
+  about_lt: String
+
+  """All values less than or equal the given value."""
+  about_lte: String
+
+  """All values greater than the given value."""
+  about_gt: String
+
+  """All values greater than or equal the given value."""
+  about_gte: String
+
+  """All values containing the given string."""
+  about_contains: String
+
+  """All values not containing the given string."""
+  about_not_contains: String
+
+  """All values starting with the given string."""
+  about_starts_with: String
+
+  """All values not starting with the given string."""
+  about_not_starts_with: String
+
+  """All values ending with the given string."""
+  about_ends_with: String
+
+  """All values not ending with the given string."""
+  about_not_ends_with: String
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  patrons_every: ZuserWhereInput
+  patrons_some: ZuserWhereInput
+  patrons_none: ZuserWhereInput
+  inbox_every: ZrequestWhereInput
+  inbox_some: ZrequestWhereInput
+  inbox_none: ZrequestWhereInput
+  _MagicalBackRelation_ZofferToZseller_every: ZofferWhereInput
+  _MagicalBackRelation_ZofferToZseller_some: ZofferWhereInput
+  _MagicalBackRelation_ZofferToZseller_none: ZofferWhereInput
+  _MagicalBackRelation_ZfriendshipToZseller_every: ZfriendshipWhereInput
+  _MagicalBackRelation_ZfriendshipToZseller_some: ZfriendshipWhereInput
+  _MagicalBackRelation_ZfriendshipToZseller_none: ZfriendshipWhereInput
+}
+
+input ZsellerWhereUniqueInput {
+  id: ID
+  email: String
+}
+
+type Zuser implements Node {
+  id: ID!
+  name: String!
+  email: String!
+  about: String!
+  password: String!
+  friends(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zfriendship!]
+  interests: [String!]!
+  requests(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zrequest!]
+  inbox(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer!]
+}
+
+"""A connection to a list of items."""
+type ZuserConnection {
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """A list of edges."""
+  edges: [ZuserEdge]!
+  aggregate: AggregateZuser!
+}
+
+input ZuserCreateInput {
+  name: String!
+  email: String!
+  about: String!
+  password: String!
+  interests: ZuserCreateinterestsInput
+  friends: ZfriendshipCreateManyInput
+  requests: ZrequestCreateManyWithoutAuthorInput
+  inbox: OfferCreateManyInput
+}
+
+input ZuserCreateinterestsInput {
+  set: [String!]
+}
+
+input ZuserCreateManyInput {
+  create: [ZuserCreateInput!]
+  connect: [ZuserWhereUniqueInput!]
+}
+
+input ZuserCreateOneWithoutRequestsInput {
+  create: ZuserCreateWithoutRequestsInput
+  connect: ZuserWhereUniqueInput
+}
+
+input ZuserCreateWithoutRequestsInput {
+  name: String!
+  email: String!
+  about: String!
+  password: String!
+  interests: ZuserCreateinterestsInput
+  friends: ZfriendshipCreateManyInput
+  inbox: OfferCreateManyInput
+}
+
+"""An edge in a connection."""
+type ZuserEdge {
+  """The item at the end of the edge."""
+  node: Zuser!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+enum ZuserOrderByInput {
+  id_ASC
+  id_DESC
+  name_ASC
+  name_DESC
+  email_ASC
+  email_DESC
+  about_ASC
+  about_DESC
+  password_ASC
+  password_DESC
+  updatedAt_ASC
+  updatedAt_DESC
+  createdAt_ASC
+  createdAt_DESC
+}
+
+type ZuserPreviousValues {
+  id: ID!
+  name: String!
+  email: String!
+  about: String!
+  password: String!
+  interests: [String!]!
+}
+
+type ZuserSubscriptionPayload {
+  mutation: MutationType!
+  node: Zuser
+  updatedFields: [String!]
+  previousValues: ZuserPreviousValues
+}
+
+input ZuserSubscriptionWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ZuserSubscriptionWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ZuserSubscriptionWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ZuserSubscriptionWhereInput!]
+
+  """
+  The subscription event gets dispatched when it's listed in mutation_in
+  """
+  mutation_in: [MutationType!]
+
+  """
+  The subscription event gets only dispatched when one of the updated fields names is included in this list
+  """
+  updatedFields_contains: String
+
+  """
+  The subscription event gets only dispatched when all of the field names included in this list have been updated
+  """
+  updatedFields_contains_every: [String!]
+
+  """
+  The subscription event gets only dispatched when some of the field names included in this list have been updated
+  """
+  updatedFields_contains_some: [String!]
+  node: ZuserWhereInput
+}
+
+input ZuserUpdateDataInput {
+  name: String
+  email: String
+  about: String
+  password: String
+  interests: ZuserUpdateinterestsInput
+  friends: ZfriendshipUpdateManyInput
+  requests: ZrequestUpdateManyWithoutAuthorInput
+  inbox: OfferUpdateManyInput
+}
+
+input ZuserUpdateInput {
+  name: String
+  email: String
+  about: String
+  password: String
+  interests: ZuserUpdateinterestsInput
+  friends: ZfriendshipUpdateManyInput
+  requests: ZrequestUpdateManyWithoutAuthorInput
+  inbox: OfferUpdateManyInput
+}
+
+input ZuserUpdateinterestsInput {
+  set: [String!]
+}
+
+input ZuserUpdateManyInput {
+  create: [ZuserCreateInput!]
+  connect: [ZuserWhereUniqueInput!]
+  disconnect: [ZuserWhereUniqueInput!]
+  delete: [ZuserWhereUniqueInput!]
+  update: [ZuserUpdateWithWhereUniqueNestedInput!]
+  upsert: [ZuserUpsertWithWhereUniqueNestedInput!]
+}
+
+input ZuserUpdateOneWithoutRequestsInput {
+  create: ZuserCreateWithoutRequestsInput
+  connect: ZuserWhereUniqueInput
+  delete: Boolean
+  update: ZuserUpdateWithoutRequestsDataInput
+  upsert: ZuserUpsertWithoutRequestsInput
+}
+
+input ZuserUpdateWithoutRequestsDataInput {
+  name: String
+  email: String
+  about: String
+  password: String
+  interests: ZuserUpdateinterestsInput
+  friends: ZfriendshipUpdateManyInput
+  inbox: OfferUpdateManyInput
+}
+
+input ZuserUpdateWithWhereUniqueNestedInput {
+  where: ZuserWhereUniqueInput!
+  data: ZuserUpdateDataInput!
+}
+
+input ZuserUpsertWithoutRequestsInput {
+  update: ZuserUpdateWithoutRequestsDataInput!
+  create: ZuserCreateWithoutRequestsInput!
+}
+
+input ZuserUpsertWithWhereUniqueNestedInput {
+  where: ZuserWhereUniqueInput!
+  update: ZuserUpdateDataInput!
+  create: ZuserCreateInput!
+}
+
+input ZuserWhereInput {
+  """Logical AND on all given filters."""
+  AND: [ZuserWhereInput!]
+
+  """Logical OR on all given filters."""
+  OR: [ZuserWhereInput!]
+
+  """Logical NOT on all given filters combined by AND."""
+  NOT: [ZuserWhereInput!]
+  id: ID
+
+  """All values that are not equal to given value."""
+  id_not: ID
+
+  """All values that are contained in given list."""
+  id_in: [ID!]
+
+  """All values that are not contained in given list."""
+  id_not_in: [ID!]
+
+  """All values less than the given value."""
+  id_lt: ID
+
+  """All values less than or equal the given value."""
+  id_lte: ID
+
+  """All values greater than the given value."""
+  id_gt: ID
+
+  """All values greater than or equal the given value."""
+  id_gte: ID
+
+  """All values containing the given string."""
+  id_contains: ID
+
+  """All values not containing the given string."""
+  id_not_contains: ID
+
+  """All values starting with the given string."""
+  id_starts_with: ID
+
+  """All values not starting with the given string."""
+  id_not_starts_with: ID
+
+  """All values ending with the given string."""
+  id_ends_with: ID
+
+  """All values not ending with the given string."""
+  id_not_ends_with: ID
+  name: String
+
+  """All values that are not equal to given value."""
+  name_not: String
+
+  """All values that are contained in given list."""
+  name_in: [String!]
+
+  """All values that are not contained in given list."""
+  name_not_in: [String!]
+
+  """All values less than the given value."""
+  name_lt: String
+
+  """All values less than or equal the given value."""
+  name_lte: String
+
+  """All values greater than the given value."""
+  name_gt: String
+
+  """All values greater than or equal the given value."""
+  name_gte: String
+
+  """All values containing the given string."""
+  name_contains: String
+
+  """All values not containing the given string."""
+  name_not_contains: String
+
+  """All values starting with the given string."""
+  name_starts_with: String
+
+  """All values not starting with the given string."""
+  name_not_starts_with: String
+
+  """All values ending with the given string."""
+  name_ends_with: String
+
+  """All values not ending with the given string."""
+  name_not_ends_with: String
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  about: String
+
+  """All values that are not equal to given value."""
+  about_not: String
+
+  """All values that are contained in given list."""
+  about_in: [String!]
+
+  """All values that are not contained in given list."""
+  about_not_in: [String!]
+
+  """All values less than the given value."""
+  about_lt: String
+
+  """All values less than or equal the given value."""
+  about_lte: String
+
+  """All values greater than the given value."""
+  about_gt: String
+
+  """All values greater than or equal the given value."""
+  about_gte: String
+
+  """All values containing the given string."""
+  about_contains: String
+
+  """All values not containing the given string."""
+  about_not_contains: String
+
+  """All values starting with the given string."""
+  about_starts_with: String
+
+  """All values not starting with the given string."""
+  about_not_starts_with: String
+
+  """All values ending with the given string."""
+  about_ends_with: String
+
+  """All values not ending with the given string."""
+  about_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  friends_every: ZfriendshipWhereInput
+  friends_some: ZfriendshipWhereInput
+  friends_none: ZfriendshipWhereInput
+  requests_every: ZrequestWhereInput
+  requests_some: ZrequestWhereInput
+  requests_none: ZrequestWhereInput
+  inbox_every: OfferWhereInput
+  inbox_some: OfferWhereInput
+  inbox_none: OfferWhereInput
+  _MagicalBackRelation_ZsellerToZuser_every: ZsellerWhereInput
+  _MagicalBackRelation_ZsellerToZuser_some: ZsellerWhereInput
+  _MagicalBackRelation_ZsellerToZuser_none: ZsellerWhereInput
+}
+
+input ZuserWhereUniqueInput {
   id: ID
   email: String
 }

@@ -2,6 +2,18 @@ const { forwardTo } = require('prisma-binding')
 const { getUserId } = require('../utils')
 
 const Query = {
+  zsellers: (parent, args, ctx, info) => {
+    //getUserId makes sure sender of requset has a valid token
+    //in the HTTP Headers thereby protecting the route
+    getUserId(ctx)
+    return forwardTo("db")(parent, args, ctx, info);
+  },
+  zoffers: (parent, args, ctx, info) => {
+    //getUserId makes sure sender of requset has a valid token
+    //in the HTTP Headers thereby protecting the route
+    getUserId(ctx)
+    return forwardTo("db")(parent, args, ctx, info);
+  },
   //offers: forwardTo("db"),
   offers: (parent, args, ctx, info) => {
     getUserId(ctx)

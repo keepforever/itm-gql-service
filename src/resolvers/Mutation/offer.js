@@ -29,7 +29,7 @@ const offer = {
 
   async createOffer(parent, { title, text }, ctx, info) {
     const userId = getUserId(ctx)
-    console.log('offer.js, userId: ', userId)
+    //console.log('offer.js, userId: ', userId)
     return ctx.db.mutation.createOffer(
       {
         data: {
