@@ -24,3 +24,58 @@ type User {
   name: String!
   posts: [Post!]!
 }
+
+
+type Zuser {
+  id: ID! @unique
+  name: String!
+  email: String! @unique
+  about: String!
+  password: String!
+  friends: [Zfriendship!]!
+  interests: [String!]!
+  requests: [Zrequest!]!
+  inbox: [Offer!]!
+}
+
+type Zoffer {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  expiresAt: DateTime!
+  title: String!
+  text: String!
+  author: Zseller!
+}
+
+type Zrequest {
+  to: Zseller!
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  wants: [String!]!
+  title: String!
+  text: String!
+  author: Zuser!
+  isPublished: Boolean! @default(value: "true")
+}
+
+type Zseller {
+  id: ID! @unique
+  name: String!
+  about: String!
+  email: String! @unique
+  password: String!
+  patrons: [Zuser!]!
+  sells: [String!]!
+  inbox: [Zrequest!]!
+}
+
+type Zfriendship {
+  id: ID! @unique
+  createdAt: DateTime!
+  updatedAt: DateTime!
+  friendsBecause: [String!]!
+  offerAllowance: Int! @default(value: 0)
+  friend: Zseller!
+}
