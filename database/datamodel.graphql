@@ -33,11 +33,11 @@ type Request {
 }
 
 type Seller {
-  identity: User!
+  identity: User! @relation(name: "SellerIdentityRelation")
   id: ID! @unique
   name: String!
   about: String!
-  patrons: [User!]!
+  patrons: [User!]! @relation(name: "SellerPatronsRelation")
   sells: [String!]!
   inbox: [Request!]!
 }

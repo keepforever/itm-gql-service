@@ -1,35 +1,23 @@
-# source: https://us1.prisma.sh/brian-cilenti-1f9206/prisma-junk/dev
-# timestamp: Mon Jul 09 2018 14:27:27 GMT-0700 (Pacific Daylight Time)
+# source: https://us1.prisma.sh/brian-cilenti-1f9206/itm-alpha/dev
+# timestamp: Tue Jul 10 2018 16:08:28 GMT-0700 (Pacific Daylight Time)
+
+type AggregateFriendship {
+  count: Int!
+}
 
 type AggregateOffer {
   count: Int!
 }
 
-type AggregatePost {
+type AggregateRequest {
+  count: Int!
+}
+
+type AggregateSeller {
   count: Int!
 }
 
 type AggregateUser {
-  count: Int!
-}
-
-type AggregateZfriendship {
-  count: Int!
-}
-
-type AggregateZoffer {
-  count: Int!
-}
-
-type AggregateZrequest {
-  count: Int!
-}
-
-type AggregateZseller {
-  count: Int!
-}
-
-type AggregateZuser {
   count: Int!
 }
 
@@ -40,1158 +28,55 @@ type BatchPayload {
 
 scalar DateTime
 
-"""
-The `Long` scalar type represents non-fractional signed whole numeric values.
-Long can represent values between -(2^63) and 2^63 - 1.
-"""
-scalar Long
-
-type Mutation {
-  createPost(data: PostCreateInput!): Post!
-  createZoffer(data: ZofferCreateInput!): Zoffer!
-  createZrequest(data: ZrequestCreateInput!): Zrequest!
-  createZfriendship(data: ZfriendshipCreateInput!): Zfriendship!
-  createZseller(data: ZsellerCreateInput!): Zseller!
-  createUser(data: UserCreateInput!): User!
-  createOffer(data: OfferCreateInput!): Offer!
-  createZuser(data: ZuserCreateInput!): Zuser!
-  updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
-  updateZoffer(data: ZofferUpdateInput!, where: ZofferWhereUniqueInput!): Zoffer
-  updateZrequest(data: ZrequestUpdateInput!, where: ZrequestWhereUniqueInput!): Zrequest
-  updateZfriendship(data: ZfriendshipUpdateInput!, where: ZfriendshipWhereUniqueInput!): Zfriendship
-  updateZseller(data: ZsellerUpdateInput!, where: ZsellerWhereUniqueInput!): Zseller
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
-  updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
-  updateZuser(data: ZuserUpdateInput!, where: ZuserWhereUniqueInput!): Zuser
-  deletePost(where: PostWhereUniqueInput!): Post
-  deleteZoffer(where: ZofferWhereUniqueInput!): Zoffer
-  deleteZrequest(where: ZrequestWhereUniqueInput!): Zrequest
-  deleteZfriendship(where: ZfriendshipWhereUniqueInput!): Zfriendship
-  deleteZseller(where: ZsellerWhereUniqueInput!): Zseller
-  deleteUser(where: UserWhereUniqueInput!): User
-  deleteOffer(where: OfferWhereUniqueInput!): Offer
-  deleteZuser(where: ZuserWhereUniqueInput!): Zuser
-  upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
-  upsertZoffer(where: ZofferWhereUniqueInput!, create: ZofferCreateInput!, update: ZofferUpdateInput!): Zoffer!
-  upsertZrequest(where: ZrequestWhereUniqueInput!, create: ZrequestCreateInput!, update: ZrequestUpdateInput!): Zrequest!
-  upsertZfriendship(where: ZfriendshipWhereUniqueInput!, create: ZfriendshipCreateInput!, update: ZfriendshipUpdateInput!): Zfriendship!
-  upsertZseller(where: ZsellerWhereUniqueInput!, create: ZsellerCreateInput!, update: ZsellerUpdateInput!): Zseller!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
-  upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
-  upsertZuser(where: ZuserWhereUniqueInput!, create: ZuserCreateInput!, update: ZuserUpdateInput!): Zuser!
-  updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
-  updateManyZoffers(data: ZofferUpdateInput!, where: ZofferWhereInput): BatchPayload!
-  updateManyZrequests(data: ZrequestUpdateInput!, where: ZrequestWhereInput): BatchPayload!
-  updateManyZfriendships(data: ZfriendshipUpdateInput!, where: ZfriendshipWhereInput): BatchPayload!
-  updateManyZsellers(data: ZsellerUpdateInput!, where: ZsellerWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
-  updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
-  updateManyZusers(data: ZuserUpdateInput!, where: ZuserWhereInput): BatchPayload!
-  deleteManyPosts(where: PostWhereInput): BatchPayload!
-  deleteManyZoffers(where: ZofferWhereInput): BatchPayload!
-  deleteManyZrequests(where: ZrequestWhereInput): BatchPayload!
-  deleteManyZfriendships(where: ZfriendshipWhereInput): BatchPayload!
-  deleteManyZsellers(where: ZsellerWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
-  deleteManyOffers(where: OfferWhereInput): BatchPayload!
-  deleteManyZusers(where: ZuserWhereInput): BatchPayload!
-}
-
-enum MutationType {
-  CREATED
-  UPDATED
-  DELETED
-}
-
-"""An object with an ID"""
-interface Node {
-  """The id of the object."""
-  id: ID!
-}
-
-type Offer implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  title: String!
-  text: String!
-  author(where: UserWhereInput): User!
-}
-
-"""A connection to a list of items."""
-type OfferConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [OfferEdge]!
-  aggregate: AggregateOffer!
-}
-
-input OfferCreateInput {
-  title: String!
-  text: String!
-  author: UserCreateOneInput!
-}
-
-input OfferCreateManyInput {
-  create: [OfferCreateInput!]
-  connect: [OfferWhereUniqueInput!]
-}
-
-"""An edge in a connection."""
-type OfferEdge {
-  """The item at the end of the edge."""
-  node: Offer!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum OfferOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  title_ASC
-  title_DESC
-  text_ASC
-  text_DESC
-}
-
-type OfferPreviousValues {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  title: String!
-  text: String!
-}
-
-type OfferSubscriptionPayload {
-  mutation: MutationType!
-  node: Offer
-  updatedFields: [String!]
-  previousValues: OfferPreviousValues
-}
-
-input OfferSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [OfferSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [OfferSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [OfferSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: OfferWhereInput
-}
-
-input OfferUpdateDataInput {
-  title: String
-  text: String
-  author: UserUpdateOneInput
-}
-
-input OfferUpdateInput {
-  title: String
-  text: String
-  author: UserUpdateOneInput
-}
-
-input OfferUpdateManyInput {
-  create: [OfferCreateInput!]
-  connect: [OfferWhereUniqueInput!]
-  disconnect: [OfferWhereUniqueInput!]
-  delete: [OfferWhereUniqueInput!]
-  update: [OfferUpdateWithWhereUniqueNestedInput!]
-  upsert: [OfferUpsertWithWhereUniqueNestedInput!]
-}
-
-input OfferUpdateWithWhereUniqueNestedInput {
-  where: OfferWhereUniqueInput!
-  data: OfferUpdateDataInput!
-}
-
-input OfferUpsertWithWhereUniqueNestedInput {
-  where: OfferWhereUniqueInput!
-  update: OfferUpdateDataInput!
-  create: OfferCreateInput!
-}
-
-input OfferWhereInput {
-  """Logical AND on all given filters."""
-  AND: [OfferWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [OfferWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [OfferWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  title: String
-
-  """All values that are not equal to given value."""
-  title_not: String
-
-  """All values that are contained in given list."""
-  title_in: [String!]
-
-  """All values that are not contained in given list."""
-  title_not_in: [String!]
-
-  """All values less than the given value."""
-  title_lt: String
-
-  """All values less than or equal the given value."""
-  title_lte: String
-
-  """All values greater than the given value."""
-  title_gt: String
-
-  """All values greater than or equal the given value."""
-  title_gte: String
-
-  """All values containing the given string."""
-  title_contains: String
-
-  """All values not containing the given string."""
-  title_not_contains: String
-
-  """All values starting with the given string."""
-  title_starts_with: String
-
-  """All values not starting with the given string."""
-  title_not_starts_with: String
-
-  """All values ending with the given string."""
-  title_ends_with: String
-
-  """All values not ending with the given string."""
-  title_not_ends_with: String
-  text: String
-
-  """All values that are not equal to given value."""
-  text_not: String
-
-  """All values that are contained in given list."""
-  text_in: [String!]
-
-  """All values that are not contained in given list."""
-  text_not_in: [String!]
-
-  """All values less than the given value."""
-  text_lt: String
-
-  """All values less than or equal the given value."""
-  text_lte: String
-
-  """All values greater than the given value."""
-  text_gt: String
-
-  """All values greater than or equal the given value."""
-  text_gte: String
-
-  """All values containing the given string."""
-  text_contains: String
-
-  """All values not containing the given string."""
-  text_not_contains: String
-
-  """All values starting with the given string."""
-  text_starts_with: String
-
-  """All values not starting with the given string."""
-  text_not_starts_with: String
-
-  """All values ending with the given string."""
-  text_ends_with: String
-
-  """All values not ending with the given string."""
-  text_not_ends_with: String
-  author: UserWhereInput
-  _MagicalBackRelation_OfferToZuser_every: ZuserWhereInput
-  _MagicalBackRelation_OfferToZuser_some: ZuserWhereInput
-  _MagicalBackRelation_OfferToZuser_none: ZuserWhereInput
-}
-
-input OfferWhereUniqueInput {
-  id: ID
-}
-
-"""Information about pagination in a connection."""
-type PageInfo {
-  """When paginating forwards, are there more items?"""
-  hasNextPage: Boolean!
-
-  """When paginating backwards, are there more items?"""
-  hasPreviousPage: Boolean!
-
-  """When paginating backwards, the cursor to continue."""
-  startCursor: String
-
-  """When paginating forwards, the cursor to continue."""
-  endCursor: String
-}
-
-type Post implements Node {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  title: String!
-  text: String!
-  author(where: UserWhereInput): User!
-  isPublished: Boolean!
-}
-
-"""A connection to a list of items."""
-type PostConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [PostEdge]!
-  aggregate: AggregatePost!
-}
-
-input PostCreateInput {
-  title: String!
-  text: String!
-  isPublished: Boolean
-  author: UserCreateOneWithoutPostsInput!
-}
-
-input PostCreateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connect: [PostWhereUniqueInput!]
-}
-
-input PostCreateWithoutAuthorInput {
-  title: String!
-  text: String!
-  isPublished: Boolean
-}
-
-"""An edge in a connection."""
-type PostEdge {
-  """The item at the end of the edge."""
-  node: Post!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum PostOrderByInput {
-  id_ASC
-  id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  title_ASC
-  title_DESC
-  text_ASC
-  text_DESC
-  isPublished_ASC
-  isPublished_DESC
-}
-
-type PostPreviousValues {
-  id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  title: String!
-  text: String!
-  isPublished: Boolean!
-}
-
-type PostSubscriptionPayload {
-  mutation: MutationType!
-  node: Post
-  updatedFields: [String!]
-  previousValues: PostPreviousValues
-}
-
-input PostSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PostSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PostSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PostSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: PostWhereInput
-}
-
-input PostUpdateInput {
-  title: String
-  text: String
-  isPublished: Boolean
-  author: UserUpdateOneWithoutPostsInput
-}
-
-input PostUpdateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connect: [PostWhereUniqueInput!]
-  disconnect: [PostWhereUniqueInput!]
-  delete: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
-}
-
-input PostUpdateWithoutAuthorDataInput {
-  title: String
-  text: String
-  isPublished: Boolean
-}
-
-input PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  data: PostUpdateWithoutAuthorDataInput!
-}
-
-input PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  update: PostUpdateWithoutAuthorDataInput!
-  create: PostCreateWithoutAuthorInput!
-}
-
-input PostWhereInput {
-  """Logical AND on all given filters."""
-  AND: [PostWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [PostWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [PostWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
-  title: String
-
-  """All values that are not equal to given value."""
-  title_not: String
-
-  """All values that are contained in given list."""
-  title_in: [String!]
-
-  """All values that are not contained in given list."""
-  title_not_in: [String!]
-
-  """All values less than the given value."""
-  title_lt: String
-
-  """All values less than or equal the given value."""
-  title_lte: String
-
-  """All values greater than the given value."""
-  title_gt: String
-
-  """All values greater than or equal the given value."""
-  title_gte: String
-
-  """All values containing the given string."""
-  title_contains: String
-
-  """All values not containing the given string."""
-  title_not_contains: String
-
-  """All values starting with the given string."""
-  title_starts_with: String
-
-  """All values not starting with the given string."""
-  title_not_starts_with: String
-
-  """All values ending with the given string."""
-  title_ends_with: String
-
-  """All values not ending with the given string."""
-  title_not_ends_with: String
-  text: String
-
-  """All values that are not equal to given value."""
-  text_not: String
-
-  """All values that are contained in given list."""
-  text_in: [String!]
-
-  """All values that are not contained in given list."""
-  text_not_in: [String!]
-
-  """All values less than the given value."""
-  text_lt: String
-
-  """All values less than or equal the given value."""
-  text_lte: String
-
-  """All values greater than the given value."""
-  text_gt: String
-
-  """All values greater than or equal the given value."""
-  text_gte: String
-
-  """All values containing the given string."""
-  text_contains: String
-
-  """All values not containing the given string."""
-  text_not_contains: String
-
-  """All values starting with the given string."""
-  text_starts_with: String
-
-  """All values not starting with the given string."""
-  text_not_starts_with: String
-
-  """All values ending with the given string."""
-  text_ends_with: String
-
-  """All values not ending with the given string."""
-  text_not_ends_with: String
-  isPublished: Boolean
-
-  """All values that are not equal to given value."""
-  isPublished_not: Boolean
-  author: UserWhereInput
-}
-
-input PostWhereUniqueInput {
-  id: ID
-}
-
-type Query {
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
-  zoffers(where: ZofferWhereInput, orderBy: ZofferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zoffer]!
-  zrequests(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zrequest]!
-  zfriendships(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zfriendship]!
-  zsellers(where: ZsellerWhereInput, orderBy: ZsellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zseller]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
-  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
-  zusers(where: ZuserWhereInput, orderBy: ZuserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zuser]!
-  post(where: PostWhereUniqueInput!): Post
-  zoffer(where: ZofferWhereUniqueInput!): Zoffer
-  zrequest(where: ZrequestWhereUniqueInput!): Zrequest
-  zfriendship(where: ZfriendshipWhereUniqueInput!): Zfriendship
-  zseller(where: ZsellerWhereUniqueInput!): Zseller
-  user(where: UserWhereUniqueInput!): User
-  offer(where: OfferWhereUniqueInput!): Offer
-  zuser(where: ZuserWhereUniqueInput!): Zuser
-  postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
-  zoffersConnection(where: ZofferWhereInput, orderBy: ZofferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZofferConnection!
-  zrequestsConnection(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZrequestConnection!
-  zfriendshipsConnection(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZfriendshipConnection!
-  zsellersConnection(where: ZsellerWhereInput, orderBy: ZsellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZsellerConnection!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
-  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
-  zusersConnection(where: ZuserWhereInput, orderBy: ZuserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZuserConnection!
-
-  """Fetches an object given its ID"""
-  node(
-    """The ID of an object"""
-    id: ID!
-  ): Node
-}
-
-type Subscription {
-  post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
-  zoffer(where: ZofferSubscriptionWhereInput): ZofferSubscriptionPayload
-  zrequest(where: ZrequestSubscriptionWhereInput): ZrequestSubscriptionPayload
-  zfriendship(where: ZfriendshipSubscriptionWhereInput): ZfriendshipSubscriptionPayload
-  zseller(where: ZsellerSubscriptionWhereInput): ZsellerSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
-  offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
-  zuser(where: ZuserSubscriptionWhereInput): ZuserSubscriptionPayload
-}
-
-type User implements Node {
-  id: ID!
-  email: String!
-  password: String!
-  name: String!
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
-}
-
-"""A connection to a list of items."""
-type UserConnection {
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """A list of edges."""
-  edges: [UserEdge]!
-  aggregate: AggregateUser!
-}
-
-input UserCreateInput {
-  email: String!
-  password: String!
-  name: String!
-  posts: PostCreateManyWithoutAuthorInput
-}
-
-input UserCreateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-}
-
-input UserCreateOneWithoutPostsInput {
-  create: UserCreateWithoutPostsInput
-  connect: UserWhereUniqueInput
-}
-
-input UserCreateWithoutPostsInput {
-  email: String!
-  password: String!
-  name: String!
-}
-
-"""An edge in a connection."""
-type UserEdge {
-  """The item at the end of the edge."""
-  node: User!
-
-  """A cursor for use in pagination."""
-  cursor: String!
-}
-
-enum UserOrderByInput {
-  id_ASC
-  id_DESC
-  email_ASC
-  email_DESC
-  password_ASC
-  password_DESC
-  name_ASC
-  name_DESC
-  updatedAt_ASC
-  updatedAt_DESC
-  createdAt_ASC
-  createdAt_DESC
-}
-
-type UserPreviousValues {
-  id: ID!
-  email: String!
-  password: String!
-  name: String!
-}
-
-type UserSubscriptionPayload {
-  mutation: MutationType!
-  node: User
-  updatedFields: [String!]
-  previousValues: UserPreviousValues
-}
-
-input UserSubscriptionWhereInput {
-  """Logical AND on all given filters."""
-  AND: [UserSubscriptionWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [UserSubscriptionWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [UserSubscriptionWhereInput!]
-
-  """
-  The subscription event gets dispatched when it's listed in mutation_in
-  """
-  mutation_in: [MutationType!]
-
-  """
-  The subscription event gets only dispatched when one of the updated fields names is included in this list
-  """
-  updatedFields_contains: String
-
-  """
-  The subscription event gets only dispatched when all of the field names included in this list have been updated
-  """
-  updatedFields_contains_every: [String!]
-
-  """
-  The subscription event gets only dispatched when some of the field names included in this list have been updated
-  """
-  updatedFields_contains_some: [String!]
-  node: UserWhereInput
-}
-
-input UserUpdateDataInput {
-  email: String
-  password: String
-  name: String
-  posts: PostUpdateManyWithoutAuthorInput
-}
-
-input UserUpdateInput {
-  email: String
-  password: String
-  name: String
-  posts: PostUpdateManyWithoutAuthorInput
-}
-
-input UserUpdateOneInput {
-  create: UserCreateInput
-  connect: UserWhereUniqueInput
-  delete: Boolean
-  update: UserUpdateDataInput
-  upsert: UserUpsertNestedInput
-}
-
-input UserUpdateOneWithoutPostsInput {
-  create: UserCreateWithoutPostsInput
-  connect: UserWhereUniqueInput
-  delete: Boolean
-  update: UserUpdateWithoutPostsDataInput
-  upsert: UserUpsertWithoutPostsInput
-}
-
-input UserUpdateWithoutPostsDataInput {
-  email: String
-  password: String
-  name: String
-}
-
-input UserUpsertNestedInput {
-  update: UserUpdateDataInput!
-  create: UserCreateInput!
-}
-
-input UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput!
-  create: UserCreateWithoutPostsInput!
-}
-
-input UserWhereInput {
-  """Logical AND on all given filters."""
-  AND: [UserWhereInput!]
-
-  """Logical OR on all given filters."""
-  OR: [UserWhereInput!]
-
-  """Logical NOT on all given filters combined by AND."""
-  NOT: [UserWhereInput!]
-  id: ID
-
-  """All values that are not equal to given value."""
-  id_not: ID
-
-  """All values that are contained in given list."""
-  id_in: [ID!]
-
-  """All values that are not contained in given list."""
-  id_not_in: [ID!]
-
-  """All values less than the given value."""
-  id_lt: ID
-
-  """All values less than or equal the given value."""
-  id_lte: ID
-
-  """All values greater than the given value."""
-  id_gt: ID
-
-  """All values greater than or equal the given value."""
-  id_gte: ID
-
-  """All values containing the given string."""
-  id_contains: ID
-
-  """All values not containing the given string."""
-  id_not_contains: ID
-
-  """All values starting with the given string."""
-  id_starts_with: ID
-
-  """All values not starting with the given string."""
-  id_not_starts_with: ID
-
-  """All values ending with the given string."""
-  id_ends_with: ID
-
-  """All values not ending with the given string."""
-  id_not_ends_with: ID
-  email: String
-
-  """All values that are not equal to given value."""
-  email_not: String
-
-  """All values that are contained in given list."""
-  email_in: [String!]
-
-  """All values that are not contained in given list."""
-  email_not_in: [String!]
-
-  """All values less than the given value."""
-  email_lt: String
-
-  """All values less than or equal the given value."""
-  email_lte: String
-
-  """All values greater than the given value."""
-  email_gt: String
-
-  """All values greater than or equal the given value."""
-  email_gte: String
-
-  """All values containing the given string."""
-  email_contains: String
-
-  """All values not containing the given string."""
-  email_not_contains: String
-
-  """All values starting with the given string."""
-  email_starts_with: String
-
-  """All values not starting with the given string."""
-  email_not_starts_with: String
-
-  """All values ending with the given string."""
-  email_ends_with: String
-
-  """All values not ending with the given string."""
-  email_not_ends_with: String
-  password: String
-
-  """All values that are not equal to given value."""
-  password_not: String
-
-  """All values that are contained in given list."""
-  password_in: [String!]
-
-  """All values that are not contained in given list."""
-  password_not_in: [String!]
-
-  """All values less than the given value."""
-  password_lt: String
-
-  """All values less than or equal the given value."""
-  password_lte: String
-
-  """All values greater than the given value."""
-  password_gt: String
-
-  """All values greater than or equal the given value."""
-  password_gte: String
-
-  """All values containing the given string."""
-  password_contains: String
-
-  """All values not containing the given string."""
-  password_not_contains: String
-
-  """All values starting with the given string."""
-  password_starts_with: String
-
-  """All values not starting with the given string."""
-  password_not_starts_with: String
-
-  """All values ending with the given string."""
-  password_ends_with: String
-
-  """All values not ending with the given string."""
-  password_not_ends_with: String
-  name: String
-
-  """All values that are not equal to given value."""
-  name_not: String
-
-  """All values that are contained in given list."""
-  name_in: [String!]
-
-  """All values that are not contained in given list."""
-  name_not_in: [String!]
-
-  """All values less than the given value."""
-  name_lt: String
-
-  """All values less than or equal the given value."""
-  name_lte: String
-
-  """All values greater than the given value."""
-  name_gt: String
-
-  """All values greater than or equal the given value."""
-  name_gte: String
-
-  """All values containing the given string."""
-  name_contains: String
-
-  """All values not containing the given string."""
-  name_not_contains: String
-
-  """All values starting with the given string."""
-  name_starts_with: String
-
-  """All values not starting with the given string."""
-  name_not_starts_with: String
-
-  """All values ending with the given string."""
-  name_ends_with: String
-
-  """All values not ending with the given string."""
-  name_not_ends_with: String
-  posts_every: PostWhereInput
-  posts_some: PostWhereInput
-  posts_none: PostWhereInput
-  _MagicalBackRelation_OfferToUser_every: OfferWhereInput
-  _MagicalBackRelation_OfferToUser_some: OfferWhereInput
-  _MagicalBackRelation_OfferToUser_none: OfferWhereInput
-}
-
-input UserWhereUniqueInput {
-  id: ID
-  email: String
-}
-
-type Zfriendship implements Node {
+type Friendship implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   friendsBecause: [String!]!
   offerAllowance: Int!
-  friend(where: ZsellerWhereInput): Zseller!
+  friend(where: UserWhereInput): User!
 }
 
 """A connection to a list of items."""
-type ZfriendshipConnection {
+type FriendshipConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [ZfriendshipEdge]!
-  aggregate: AggregateZfriendship!
+  edges: [FriendshipEdge]!
+  aggregate: AggregateFriendship!
 }
 
-input ZfriendshipCreatefriendsBecauseInput {
+input FriendshipCreatefriendsBecauseInput {
   set: [String!]
 }
 
-input ZfriendshipCreateInput {
+input FriendshipCreateInput {
   offerAllowance: Int
-  friendsBecause: ZfriendshipCreatefriendsBecauseInput
-  friend: ZsellerCreateOneInput!
+  friendsBecause: FriendshipCreatefriendsBecauseInput
+  friend: UserCreateOneWithoutFriendsInput!
 }
 
-input ZfriendshipCreateManyInput {
-  create: [ZfriendshipCreateInput!]
-  connect: [ZfriendshipWhereUniqueInput!]
+input FriendshipCreateManyWithoutFriendInput {
+  create: [FriendshipCreateWithoutFriendInput!]
+  connect: [FriendshipWhereUniqueInput!]
+}
+
+input FriendshipCreateWithoutFriendInput {
+  offerAllowance: Int
+  friendsBecause: FriendshipCreatefriendsBecauseInput
 }
 
 """An edge in a connection."""
-type ZfriendshipEdge {
+type FriendshipEdge {
   """The item at the end of the edge."""
-  node: Zfriendship!
+  node: Friendship!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum ZfriendshipOrderByInput {
+enum FriendshipOrderByInput {
   id_ASC
   id_DESC
   createdAt_ASC
@@ -1202,7 +87,7 @@ enum ZfriendshipOrderByInput {
   offerAllowance_DESC
 }
 
-type ZfriendshipPreviousValues {
+type FriendshipPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -1210,22 +95,22 @@ type ZfriendshipPreviousValues {
   offerAllowance: Int!
 }
 
-type ZfriendshipSubscriptionPayload {
+type FriendshipSubscriptionPayload {
   mutation: MutationType!
-  node: Zfriendship
+  node: Friendship
   updatedFields: [String!]
-  previousValues: ZfriendshipPreviousValues
+  previousValues: FriendshipPreviousValues
 }
 
-input ZfriendshipSubscriptionWhereInput {
+input FriendshipSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ZfriendshipSubscriptionWhereInput!]
+  AND: [FriendshipSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ZfriendshipSubscriptionWhereInput!]
+  OR: [FriendshipSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ZfriendshipSubscriptionWhereInput!]
+  NOT: [FriendshipSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -1246,54 +131,53 @@ input ZfriendshipSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ZfriendshipWhereInput
+  node: FriendshipWhereInput
 }
 
-input ZfriendshipUpdateDataInput {
-  offerAllowance: Int
-  friendsBecause: ZfriendshipUpdatefriendsBecauseInput
-  friend: ZsellerUpdateOneInput
-}
-
-input ZfriendshipUpdatefriendsBecauseInput {
+input FriendshipUpdatefriendsBecauseInput {
   set: [String!]
 }
 
-input ZfriendshipUpdateInput {
+input FriendshipUpdateInput {
   offerAllowance: Int
-  friendsBecause: ZfriendshipUpdatefriendsBecauseInput
-  friend: ZsellerUpdateOneInput
+  friendsBecause: FriendshipUpdatefriendsBecauseInput
+  friend: UserUpdateOneWithoutFriendsInput
 }
 
-input ZfriendshipUpdateManyInput {
-  create: [ZfriendshipCreateInput!]
-  connect: [ZfriendshipWhereUniqueInput!]
-  disconnect: [ZfriendshipWhereUniqueInput!]
-  delete: [ZfriendshipWhereUniqueInput!]
-  update: [ZfriendshipUpdateWithWhereUniqueNestedInput!]
-  upsert: [ZfriendshipUpsertWithWhereUniqueNestedInput!]
+input FriendshipUpdateManyWithoutFriendInput {
+  create: [FriendshipCreateWithoutFriendInput!]
+  connect: [FriendshipWhereUniqueInput!]
+  disconnect: [FriendshipWhereUniqueInput!]
+  delete: [FriendshipWhereUniqueInput!]
+  update: [FriendshipUpdateWithWhereUniqueWithoutFriendInput!]
+  upsert: [FriendshipUpsertWithWhereUniqueWithoutFriendInput!]
 }
 
-input ZfriendshipUpdateWithWhereUniqueNestedInput {
-  where: ZfriendshipWhereUniqueInput!
-  data: ZfriendshipUpdateDataInput!
+input FriendshipUpdateWithoutFriendDataInput {
+  offerAllowance: Int
+  friendsBecause: FriendshipUpdatefriendsBecauseInput
 }
 
-input ZfriendshipUpsertWithWhereUniqueNestedInput {
-  where: ZfriendshipWhereUniqueInput!
-  update: ZfriendshipUpdateDataInput!
-  create: ZfriendshipCreateInput!
+input FriendshipUpdateWithWhereUniqueWithoutFriendInput {
+  where: FriendshipWhereUniqueInput!
+  data: FriendshipUpdateWithoutFriendDataInput!
 }
 
-input ZfriendshipWhereInput {
+input FriendshipUpsertWithWhereUniqueWithoutFriendInput {
+  where: FriendshipWhereUniqueInput!
+  update: FriendshipUpdateWithoutFriendDataInput!
+  create: FriendshipCreateWithoutFriendInput!
+}
+
+input FriendshipWhereInput {
   """Logical AND on all given filters."""
-  AND: [ZfriendshipWhereInput!]
+  AND: [FriendshipWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ZfriendshipWhereInput!]
+  OR: [FriendshipWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ZfriendshipWhereInput!]
+  NOT: [FriendshipWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -1400,53 +284,106 @@ input ZfriendshipWhereInput {
 
   """All values greater than or equal the given value."""
   offerAllowance_gte: Int
-  friend: ZsellerWhereInput
-  _MagicalBackRelation_ZfriendshipToZuser_every: ZuserWhereInput
-  _MagicalBackRelation_ZfriendshipToZuser_some: ZuserWhereInput
-  _MagicalBackRelation_ZfriendshipToZuser_none: ZuserWhereInput
+  friend: UserWhereInput
 }
 
-input ZfriendshipWhereUniqueInput {
+input FriendshipWhereUniqueInput {
   id: ID
 }
 
-type Zoffer implements Node {
+"""
+The `Long` scalar type represents non-fractional signed whole numeric values.
+Long can represent values between -(2^63) and 2^63 - 1.
+"""
+scalar Long
+
+type Mutation {
+  createRequest(data: RequestCreateInput!): Request!
+  createFriendship(data: FriendshipCreateInput!): Friendship!
+  createSeller(data: SellerCreateInput!): Seller!
+  createOffer(data: OfferCreateInput!): Offer!
+  createUser(data: UserCreateInput!): User!
+  updateRequest(data: RequestUpdateInput!, where: RequestWhereUniqueInput!): Request
+  updateFriendship(data: FriendshipUpdateInput!, where: FriendshipWhereUniqueInput!): Friendship
+  updateSeller(data: SellerUpdateInput!, where: SellerWhereUniqueInput!): Seller
+  updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  deleteRequest(where: RequestWhereUniqueInput!): Request
+  deleteFriendship(where: FriendshipWhereUniqueInput!): Friendship
+  deleteSeller(where: SellerWhereUniqueInput!): Seller
+  deleteOffer(where: OfferWhereUniqueInput!): Offer
+  deleteUser(where: UserWhereUniqueInput!): User
+  upsertRequest(where: RequestWhereUniqueInput!, create: RequestCreateInput!, update: RequestUpdateInput!): Request!
+  upsertFriendship(where: FriendshipWhereUniqueInput!, create: FriendshipCreateInput!, update: FriendshipUpdateInput!): Friendship!
+  upsertSeller(where: SellerWhereUniqueInput!, create: SellerCreateInput!, update: SellerUpdateInput!): Seller!
+  upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  updateManyRequests(data: RequestUpdateInput!, where: RequestWhereInput): BatchPayload!
+  updateManyFriendships(data: FriendshipUpdateInput!, where: FriendshipWhereInput): BatchPayload!
+  updateManySellers(data: SellerUpdateInput!, where: SellerWhereInput): BatchPayload!
+  updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  deleteManyRequests(where: RequestWhereInput): BatchPayload!
+  deleteManyFriendships(where: FriendshipWhereInput): BatchPayload!
+  deleteManySellers(where: SellerWhereInput): BatchPayload!
+  deleteManyOffers(where: OfferWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+}
+
+enum MutationType {
+  CREATED
+  UPDATED
+  DELETED
+}
+
+"""An object with an ID"""
+interface Node {
+  """The id of the object."""
+  id: ID!
+}
+
+type Offer implements Node {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   expiresAt: DateTime!
   title: String!
   text: String!
-  author(where: ZsellerWhereInput): Zseller!
+  author(where: SellerWhereInput): Seller!
 }
 
 """A connection to a list of items."""
-type ZofferConnection {
+type OfferConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [ZofferEdge]!
-  aggregate: AggregateZoffer!
+  edges: [OfferEdge]!
+  aggregate: AggregateOffer!
 }
 
-input ZofferCreateInput {
+input OfferCreateInput {
   expiresAt: DateTime!
   title: String!
   text: String!
-  author: ZsellerCreateOneInput!
+  author: SellerCreateOneInput!
+}
+
+input OfferCreateManyInput {
+  create: [OfferCreateInput!]
+  connect: [OfferWhereUniqueInput!]
 }
 
 """An edge in a connection."""
-type ZofferEdge {
+type OfferEdge {
   """The item at the end of the edge."""
-  node: Zoffer!
+  node: Offer!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum ZofferOrderByInput {
+enum OfferOrderByInput {
   id_ASC
   id_DESC
   createdAt_ASC
@@ -1461,7 +398,7 @@ enum ZofferOrderByInput {
   text_DESC
 }
 
-type ZofferPreviousValues {
+type OfferPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -1470,22 +407,22 @@ type ZofferPreviousValues {
   text: String!
 }
 
-type ZofferSubscriptionPayload {
+type OfferSubscriptionPayload {
   mutation: MutationType!
-  node: Zoffer
+  node: Offer
   updatedFields: [String!]
-  previousValues: ZofferPreviousValues
+  previousValues: OfferPreviousValues
 }
 
-input ZofferSubscriptionWhereInput {
+input OfferSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ZofferSubscriptionWhereInput!]
+  AND: [OfferSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ZofferSubscriptionWhereInput!]
+  OR: [OfferSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ZofferSubscriptionWhereInput!]
+  NOT: [OfferSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -1506,25 +443,52 @@ input ZofferSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ZofferWhereInput
+  node: OfferWhereInput
 }
 
-input ZofferUpdateInput {
+input OfferUpdateDataInput {
   expiresAt: DateTime
   title: String
   text: String
-  author: ZsellerUpdateOneInput
+  author: SellerUpdateOneInput
 }
 
-input ZofferWhereInput {
+input OfferUpdateInput {
+  expiresAt: DateTime
+  title: String
+  text: String
+  author: SellerUpdateOneInput
+}
+
+input OfferUpdateManyInput {
+  create: [OfferCreateInput!]
+  connect: [OfferWhereUniqueInput!]
+  disconnect: [OfferWhereUniqueInput!]
+  delete: [OfferWhereUniqueInput!]
+  update: [OfferUpdateWithWhereUniqueNestedInput!]
+  upsert: [OfferUpsertWithWhereUniqueNestedInput!]
+}
+
+input OfferUpdateWithWhereUniqueNestedInput {
+  where: OfferWhereUniqueInput!
+  data: OfferUpdateDataInput!
+}
+
+input OfferUpsertWithWhereUniqueNestedInput {
+  where: OfferWhereUniqueInput!
+  update: OfferUpdateDataInput!
+  create: OfferCreateInput!
+}
+
+input OfferWhereInput {
   """Logical AND on all given filters."""
-  AND: [ZofferWhereInput!]
+  AND: [OfferWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ZofferWhereInput!]
+  OR: [OfferWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ZofferWhereInput!]
+  NOT: [OfferWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -1711,84 +675,126 @@ input ZofferWhereInput {
 
   """All values not ending with the given string."""
   text_not_ends_with: String
-  author: ZsellerWhereInput
+  author: SellerWhereInput
+  _MagicalBackRelation_OfferToUser_every: UserWhereInput
+  _MagicalBackRelation_OfferToUser_some: UserWhereInput
+  _MagicalBackRelation_OfferToUser_none: UserWhereInput
 }
 
-input ZofferWhereUniqueInput {
+input OfferWhereUniqueInput {
   id: ID
 }
 
-type Zrequest implements Node {
-  to(where: ZsellerWhereInput): Zseller!
+"""Information about pagination in a connection."""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+type Query {
+  requests(where: RequestWhereInput, orderBy: RequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Request]!
+  friendships(where: FriendshipWhereInput, orderBy: FriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Friendship]!
+  sellers(where: SellerWhereInput, orderBy: SellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Seller]!
+  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  request(where: RequestWhereUniqueInput!): Request
+  friendship(where: FriendshipWhereUniqueInput!): Friendship
+  seller(where: SellerWhereUniqueInput!): Seller
+  offer(where: OfferWhereUniqueInput!): Offer
+  user(where: UserWhereUniqueInput!): User
+  requestsConnection(where: RequestWhereInput, orderBy: RequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): RequestConnection!
+  friendshipsConnection(where: FriendshipWhereInput, orderBy: FriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): FriendshipConnection!
+  sellersConnection(where: SellerWhereInput, orderBy: SellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): SellerConnection!
+  offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+
+  """Fetches an object given its ID"""
+  node(
+    """The ID of an object"""
+    id: ID!
+  ): Node
+}
+
+type Request implements Node {
+  to(where: SellerWhereInput): Seller!
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
   wants: [String!]!
   title: String!
   text: String!
-  author(where: ZuserWhereInput): Zuser!
+  author(where: UserWhereInput): User!
   isPublished: Boolean!
 }
 
 """A connection to a list of items."""
-type ZrequestConnection {
+type RequestConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [ZrequestEdge]!
-  aggregate: AggregateZrequest!
+  edges: [RequestEdge]!
+  aggregate: AggregateRequest!
 }
 
-input ZrequestCreateInput {
+input RequestCreateInput {
   title: String!
   text: String!
   isPublished: Boolean
-  wants: ZrequestCreatewantsInput
-  to: ZsellerCreateOneWithoutInboxInput!
-  author: ZuserCreateOneWithoutRequestsInput!
+  wants: RequestCreatewantsInput
+  to: SellerCreateOneWithoutInboxInput!
+  author: UserCreateOneWithoutRequestsInput!
 }
 
-input ZrequestCreateManyWithoutAuthorInput {
-  create: [ZrequestCreateWithoutAuthorInput!]
-  connect: [ZrequestWhereUniqueInput!]
+input RequestCreateManyWithoutAuthorInput {
+  create: [RequestCreateWithoutAuthorInput!]
+  connect: [RequestWhereUniqueInput!]
 }
 
-input ZrequestCreateManyWithoutToInput {
-  create: [ZrequestCreateWithoutToInput!]
-  connect: [ZrequestWhereUniqueInput!]
+input RequestCreateManyWithoutToInput {
+  create: [RequestCreateWithoutToInput!]
+  connect: [RequestWhereUniqueInput!]
 }
 
-input ZrequestCreatewantsInput {
+input RequestCreatewantsInput {
   set: [String!]
 }
 
-input ZrequestCreateWithoutAuthorInput {
+input RequestCreateWithoutAuthorInput {
   title: String!
   text: String!
   isPublished: Boolean
-  wants: ZrequestCreatewantsInput
-  to: ZsellerCreateOneWithoutInboxInput!
+  wants: RequestCreatewantsInput
+  to: SellerCreateOneWithoutInboxInput!
 }
 
-input ZrequestCreateWithoutToInput {
+input RequestCreateWithoutToInput {
   title: String!
   text: String!
   isPublished: Boolean
-  wants: ZrequestCreatewantsInput
-  author: ZuserCreateOneWithoutRequestsInput!
+  wants: RequestCreatewantsInput
+  author: UserCreateOneWithoutRequestsInput!
 }
 
 """An edge in a connection."""
-type ZrequestEdge {
+type RequestEdge {
   """The item at the end of the edge."""
-  node: Zrequest!
+  node: Request!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum ZrequestOrderByInput {
+enum RequestOrderByInput {
   id_ASC
   id_DESC
   createdAt_ASC
@@ -1803,7 +809,7 @@ enum ZrequestOrderByInput {
   isPublished_DESC
 }
 
-type ZrequestPreviousValues {
+type RequestPreviousValues {
   id: ID!
   createdAt: DateTime!
   updatedAt: DateTime!
@@ -1813,22 +819,22 @@ type ZrequestPreviousValues {
   isPublished: Boolean!
 }
 
-type ZrequestSubscriptionPayload {
+type RequestSubscriptionPayload {
   mutation: MutationType!
-  node: Zrequest
+  node: Request
   updatedFields: [String!]
-  previousValues: ZrequestPreviousValues
+  previousValues: RequestPreviousValues
 }
 
-input ZrequestSubscriptionWhereInput {
+input RequestSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ZrequestSubscriptionWhereInput!]
+  AND: [RequestSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ZrequestSubscriptionWhereInput!]
+  OR: [RequestSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ZrequestSubscriptionWhereInput!]
+  NOT: [RequestSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -1849,87 +855,87 @@ input ZrequestSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ZrequestWhereInput
+  node: RequestWhereInput
 }
 
-input ZrequestUpdateInput {
+input RequestUpdateInput {
   title: String
   text: String
   isPublished: Boolean
-  wants: ZrequestUpdatewantsInput
-  to: ZsellerUpdateOneWithoutInboxInput
-  author: ZuserUpdateOneWithoutRequestsInput
+  wants: RequestUpdatewantsInput
+  to: SellerUpdateOneWithoutInboxInput
+  author: UserUpdateOneWithoutRequestsInput
 }
 
-input ZrequestUpdateManyWithoutAuthorInput {
-  create: [ZrequestCreateWithoutAuthorInput!]
-  connect: [ZrequestWhereUniqueInput!]
-  disconnect: [ZrequestWhereUniqueInput!]
-  delete: [ZrequestWhereUniqueInput!]
-  update: [ZrequestUpdateWithWhereUniqueWithoutAuthorInput!]
-  upsert: [ZrequestUpsertWithWhereUniqueWithoutAuthorInput!]
+input RequestUpdateManyWithoutAuthorInput {
+  create: [RequestCreateWithoutAuthorInput!]
+  connect: [RequestWhereUniqueInput!]
+  disconnect: [RequestWhereUniqueInput!]
+  delete: [RequestWhereUniqueInput!]
+  update: [RequestUpdateWithWhereUniqueWithoutAuthorInput!]
+  upsert: [RequestUpsertWithWhereUniqueWithoutAuthorInput!]
 }
 
-input ZrequestUpdateManyWithoutToInput {
-  create: [ZrequestCreateWithoutToInput!]
-  connect: [ZrequestWhereUniqueInput!]
-  disconnect: [ZrequestWhereUniqueInput!]
-  delete: [ZrequestWhereUniqueInput!]
-  update: [ZrequestUpdateWithWhereUniqueWithoutToInput!]
-  upsert: [ZrequestUpsertWithWhereUniqueWithoutToInput!]
+input RequestUpdateManyWithoutToInput {
+  create: [RequestCreateWithoutToInput!]
+  connect: [RequestWhereUniqueInput!]
+  disconnect: [RequestWhereUniqueInput!]
+  delete: [RequestWhereUniqueInput!]
+  update: [RequestUpdateWithWhereUniqueWithoutToInput!]
+  upsert: [RequestUpsertWithWhereUniqueWithoutToInput!]
 }
 
-input ZrequestUpdatewantsInput {
+input RequestUpdatewantsInput {
   set: [String!]
 }
 
-input ZrequestUpdateWithoutAuthorDataInput {
+input RequestUpdateWithoutAuthorDataInput {
   title: String
   text: String
   isPublished: Boolean
-  wants: ZrequestUpdatewantsInput
-  to: ZsellerUpdateOneWithoutInboxInput
+  wants: RequestUpdatewantsInput
+  to: SellerUpdateOneWithoutInboxInput
 }
 
-input ZrequestUpdateWithoutToDataInput {
+input RequestUpdateWithoutToDataInput {
   title: String
   text: String
   isPublished: Boolean
-  wants: ZrequestUpdatewantsInput
-  author: ZuserUpdateOneWithoutRequestsInput
+  wants: RequestUpdatewantsInput
+  author: UserUpdateOneWithoutRequestsInput
 }
 
-input ZrequestUpdateWithWhereUniqueWithoutAuthorInput {
-  where: ZrequestWhereUniqueInput!
-  data: ZrequestUpdateWithoutAuthorDataInput!
+input RequestUpdateWithWhereUniqueWithoutAuthorInput {
+  where: RequestWhereUniqueInput!
+  data: RequestUpdateWithoutAuthorDataInput!
 }
 
-input ZrequestUpdateWithWhereUniqueWithoutToInput {
-  where: ZrequestWhereUniqueInput!
-  data: ZrequestUpdateWithoutToDataInput!
+input RequestUpdateWithWhereUniqueWithoutToInput {
+  where: RequestWhereUniqueInput!
+  data: RequestUpdateWithoutToDataInput!
 }
 
-input ZrequestUpsertWithWhereUniqueWithoutAuthorInput {
-  where: ZrequestWhereUniqueInput!
-  update: ZrequestUpdateWithoutAuthorDataInput!
-  create: ZrequestCreateWithoutAuthorInput!
+input RequestUpsertWithWhereUniqueWithoutAuthorInput {
+  where: RequestWhereUniqueInput!
+  update: RequestUpdateWithoutAuthorDataInput!
+  create: RequestCreateWithoutAuthorInput!
 }
 
-input ZrequestUpsertWithWhereUniqueWithoutToInput {
-  where: ZrequestWhereUniqueInput!
-  update: ZrequestUpdateWithoutToDataInput!
-  create: ZrequestCreateWithoutToInput!
+input RequestUpsertWithWhereUniqueWithoutToInput {
+  where: RequestWhereUniqueInput!
+  update: RequestUpdateWithoutToDataInput!
+  create: RequestCreateWithoutToInput!
 }
 
-input ZrequestWhereInput {
+input RequestWhereInput {
   """Logical AND on all given filters."""
-  AND: [ZrequestWhereInput!]
+  AND: [RequestWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ZrequestWhereInput!]
+  OR: [RequestWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ZrequestWhereInput!]
+  NOT: [RequestWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -2098,119 +1104,110 @@ input ZrequestWhereInput {
 
   """All values that are not equal to given value."""
   isPublished_not: Boolean
-  to: ZsellerWhereInput
-  author: ZuserWhereInput
+  to: SellerWhereInput
+  author: UserWhereInput
 }
 
-input ZrequestWhereUniqueInput {
+input RequestWhereUniqueInput {
   id: ID
 }
 
-type Zseller implements Node {
+type Seller implements Node {
+  identity(where: UserWhereInput): User!
   id: ID!
   name: String!
   about: String!
-  email: String!
-  password: String!
-  patrons(where: ZuserWhereInput, orderBy: ZuserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zuser!]
+  patrons(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User!]
   sells: [String!]!
-  inbox(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zrequest!]
+  inbox(where: RequestWhereInput, orderBy: RequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Request!]
 }
 
 """A connection to a list of items."""
-type ZsellerConnection {
+type SellerConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [ZsellerEdge]!
-  aggregate: AggregateZseller!
+  edges: [SellerEdge]!
+  aggregate: AggregateSeller!
 }
 
-input ZsellerCreateInput {
+input SellerCreateInput {
   name: String!
   about: String!
-  email: String!
-  password: String!
-  sells: ZsellerCreatesellsInput
-  patrons: ZuserCreateManyInput
-  inbox: ZrequestCreateManyWithoutToInput
+  sells: SellerCreatesellsInput
+  identity: UserCreateOneInput!
+  patrons: UserCreateManyInput
+  inbox: RequestCreateManyWithoutToInput
 }
 
-input ZsellerCreateOneInput {
-  create: ZsellerCreateInput
-  connect: ZsellerWhereUniqueInput
+input SellerCreateOneInput {
+  create: SellerCreateInput
+  connect: SellerWhereUniqueInput
 }
 
-input ZsellerCreateOneWithoutInboxInput {
-  create: ZsellerCreateWithoutInboxInput
-  connect: ZsellerWhereUniqueInput
+input SellerCreateOneWithoutInboxInput {
+  create: SellerCreateWithoutInboxInput
+  connect: SellerWhereUniqueInput
 }
 
-input ZsellerCreatesellsInput {
+input SellerCreatesellsInput {
   set: [String!]
 }
 
-input ZsellerCreateWithoutInboxInput {
+input SellerCreateWithoutInboxInput {
   name: String!
   about: String!
-  email: String!
-  password: String!
-  sells: ZsellerCreatesellsInput
-  patrons: ZuserCreateManyInput
+  sells: SellerCreatesellsInput
+  identity: UserCreateOneInput!
+  patrons: UserCreateManyInput
 }
 
 """An edge in a connection."""
-type ZsellerEdge {
+type SellerEdge {
   """The item at the end of the edge."""
-  node: Zseller!
+  node: Seller!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum ZsellerOrderByInput {
+enum SellerOrderByInput {
   id_ASC
   id_DESC
   name_ASC
   name_DESC
   about_ASC
   about_DESC
-  email_ASC
-  email_DESC
-  password_ASC
-  password_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
   createdAt_DESC
 }
 
-type ZsellerPreviousValues {
+type SellerPreviousValues {
   id: ID!
   name: String!
   about: String!
-  email: String!
-  password: String!
   sells: [String!]!
 }
 
-type ZsellerSubscriptionPayload {
+type SellerSubscriptionPayload {
   mutation: MutationType!
-  node: Zseller
+  node: Seller
   updatedFields: [String!]
-  previousValues: ZsellerPreviousValues
+  previousValues: SellerPreviousValues
 }
 
-input ZsellerSubscriptionWhereInput {
+input SellerSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ZsellerSubscriptionWhereInput!]
+  AND: [SellerSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ZsellerSubscriptionWhereInput!]
+  OR: [SellerSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ZsellerSubscriptionWhereInput!]
+  NOT: [SellerSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -2231,77 +1228,74 @@ input ZsellerSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ZsellerWhereInput
+  node: SellerWhereInput
 }
 
-input ZsellerUpdateDataInput {
+input SellerUpdateDataInput {
   name: String
   about: String
-  email: String
-  password: String
-  sells: ZsellerUpdatesellsInput
-  patrons: ZuserUpdateManyInput
-  inbox: ZrequestUpdateManyWithoutToInput
+  sells: SellerUpdatesellsInput
+  identity: UserUpdateOneInput
+  patrons: UserUpdateManyInput
+  inbox: RequestUpdateManyWithoutToInput
 }
 
-input ZsellerUpdateInput {
+input SellerUpdateInput {
   name: String
   about: String
-  email: String
-  password: String
-  sells: ZsellerUpdatesellsInput
-  patrons: ZuserUpdateManyInput
-  inbox: ZrequestUpdateManyWithoutToInput
+  sells: SellerUpdatesellsInput
+  identity: UserUpdateOneInput
+  patrons: UserUpdateManyInput
+  inbox: RequestUpdateManyWithoutToInput
 }
 
-input ZsellerUpdateOneInput {
-  create: ZsellerCreateInput
-  connect: ZsellerWhereUniqueInput
+input SellerUpdateOneInput {
+  create: SellerCreateInput
+  connect: SellerWhereUniqueInput
   delete: Boolean
-  update: ZsellerUpdateDataInput
-  upsert: ZsellerUpsertNestedInput
+  update: SellerUpdateDataInput
+  upsert: SellerUpsertNestedInput
 }
 
-input ZsellerUpdateOneWithoutInboxInput {
-  create: ZsellerCreateWithoutInboxInput
-  connect: ZsellerWhereUniqueInput
+input SellerUpdateOneWithoutInboxInput {
+  create: SellerCreateWithoutInboxInput
+  connect: SellerWhereUniqueInput
   delete: Boolean
-  update: ZsellerUpdateWithoutInboxDataInput
-  upsert: ZsellerUpsertWithoutInboxInput
+  update: SellerUpdateWithoutInboxDataInput
+  upsert: SellerUpsertWithoutInboxInput
 }
 
-input ZsellerUpdatesellsInput {
+input SellerUpdatesellsInput {
   set: [String!]
 }
 
-input ZsellerUpdateWithoutInboxDataInput {
+input SellerUpdateWithoutInboxDataInput {
   name: String
   about: String
-  email: String
-  password: String
-  sells: ZsellerUpdatesellsInput
-  patrons: ZuserUpdateManyInput
+  sells: SellerUpdatesellsInput
+  identity: UserUpdateOneInput
+  patrons: UserUpdateManyInput
 }
 
-input ZsellerUpsertNestedInput {
-  update: ZsellerUpdateDataInput!
-  create: ZsellerCreateInput!
+input SellerUpsertNestedInput {
+  update: SellerUpdateDataInput!
+  create: SellerCreateInput!
 }
 
-input ZsellerUpsertWithoutInboxInput {
-  update: ZsellerUpdateWithoutInboxDataInput!
-  create: ZsellerCreateWithoutInboxInput!
+input SellerUpsertWithoutInboxInput {
+  update: SellerUpdateWithoutInboxDataInput!
+  create: SellerCreateWithoutInboxInput!
 }
 
-input ZsellerWhereInput {
+input SellerWhereInput {
   """Logical AND on all given filters."""
-  AND: [ZsellerWhereInput!]
+  AND: [SellerWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ZsellerWhereInput!]
+  OR: [SellerWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ZsellerWhereInput!]
+  NOT: [SellerWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -2422,172 +1416,117 @@ input ZsellerWhereInput {
 
   """All values not ending with the given string."""
   about_not_ends_with: String
-  email: String
-
-  """All values that are not equal to given value."""
-  email_not: String
-
-  """All values that are contained in given list."""
-  email_in: [String!]
-
-  """All values that are not contained in given list."""
-  email_not_in: [String!]
-
-  """All values less than the given value."""
-  email_lt: String
-
-  """All values less than or equal the given value."""
-  email_lte: String
-
-  """All values greater than the given value."""
-  email_gt: String
-
-  """All values greater than or equal the given value."""
-  email_gte: String
-
-  """All values containing the given string."""
-  email_contains: String
-
-  """All values not containing the given string."""
-  email_not_contains: String
-
-  """All values starting with the given string."""
-  email_starts_with: String
-
-  """All values not starting with the given string."""
-  email_not_starts_with: String
-
-  """All values ending with the given string."""
-  email_ends_with: String
-
-  """All values not ending with the given string."""
-  email_not_ends_with: String
-  password: String
-
-  """All values that are not equal to given value."""
-  password_not: String
-
-  """All values that are contained in given list."""
-  password_in: [String!]
-
-  """All values that are not contained in given list."""
-  password_not_in: [String!]
-
-  """All values less than the given value."""
-  password_lt: String
-
-  """All values less than or equal the given value."""
-  password_lte: String
-
-  """All values greater than the given value."""
-  password_gt: String
-
-  """All values greater than or equal the given value."""
-  password_gte: String
-
-  """All values containing the given string."""
-  password_contains: String
-
-  """All values not containing the given string."""
-  password_not_contains: String
-
-  """All values starting with the given string."""
-  password_starts_with: String
-
-  """All values not starting with the given string."""
-  password_not_starts_with: String
-
-  """All values ending with the given string."""
-  password_ends_with: String
-
-  """All values not ending with the given string."""
-  password_not_ends_with: String
-  patrons_every: ZuserWhereInput
-  patrons_some: ZuserWhereInput
-  patrons_none: ZuserWhereInput
-  inbox_every: ZrequestWhereInput
-  inbox_some: ZrequestWhereInput
-  inbox_none: ZrequestWhereInput
-  _MagicalBackRelation_ZofferToZseller_every: ZofferWhereInput
-  _MagicalBackRelation_ZofferToZseller_some: ZofferWhereInput
-  _MagicalBackRelation_ZofferToZseller_none: ZofferWhereInput
-  _MagicalBackRelation_ZfriendshipToZseller_every: ZfriendshipWhereInput
-  _MagicalBackRelation_ZfriendshipToZseller_some: ZfriendshipWhereInput
-  _MagicalBackRelation_ZfriendshipToZseller_none: ZfriendshipWhereInput
+  identity: UserWhereInput
+  patrons_every: UserWhereInput
+  patrons_some: UserWhereInput
+  patrons_none: UserWhereInput
+  inbox_every: RequestWhereInput
+  inbox_some: RequestWhereInput
+  inbox_none: RequestWhereInput
+  _MagicalBackRelation_OfferToSeller_every: OfferWhereInput
+  _MagicalBackRelation_OfferToSeller_some: OfferWhereInput
+  _MagicalBackRelation_OfferToSeller_none: OfferWhereInput
 }
 
-input ZsellerWhereUniqueInput {
+input SellerWhereUniqueInput {
   id: ID
-  email: String
 }
 
-type Zuser implements Node {
+type Subscription {
+  request(where: RequestSubscriptionWhereInput): RequestSubscriptionPayload
+  friendship(where: FriendshipSubscriptionWhereInput): FriendshipSubscriptionPayload
+  seller(where: SellerSubscriptionWhereInput): SellerSubscriptionPayload
+  offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+}
+
+type User implements Node {
   id: ID!
   name: String!
   email: String!
   about: String!
   password: String!
-  friends(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zfriendship!]
+  friends(where: FriendshipWhereInput, orderBy: FriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Friendship!]
   interests: [String!]!
-  requests(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zrequest!]
+  requests(where: RequestWhereInput, orderBy: RequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Request!]
   inbox(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer!]
 }
 
 """A connection to a list of items."""
-type ZuserConnection {
+type UserConnection {
   """Information to aid in pagination."""
   pageInfo: PageInfo!
 
   """A list of edges."""
-  edges: [ZuserEdge]!
-  aggregate: AggregateZuser!
+  edges: [UserEdge]!
+  aggregate: AggregateUser!
 }
 
-input ZuserCreateInput {
+input UserCreateInput {
   name: String!
   email: String!
   about: String!
   password: String!
-  interests: ZuserCreateinterestsInput
-  friends: ZfriendshipCreateManyInput
-  requests: ZrequestCreateManyWithoutAuthorInput
+  interests: UserCreateinterestsInput
+  friends: FriendshipCreateManyWithoutFriendInput
+  requests: RequestCreateManyWithoutAuthorInput
   inbox: OfferCreateManyInput
 }
 
-input ZuserCreateinterestsInput {
+input UserCreateinterestsInput {
   set: [String!]
 }
 
-input ZuserCreateManyInput {
-  create: [ZuserCreateInput!]
-  connect: [ZuserWhereUniqueInput!]
+input UserCreateManyInput {
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
 }
 
-input ZuserCreateOneWithoutRequestsInput {
-  create: ZuserCreateWithoutRequestsInput
-  connect: ZuserWhereUniqueInput
+input UserCreateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
 }
 
-input ZuserCreateWithoutRequestsInput {
+input UserCreateOneWithoutFriendsInput {
+  create: UserCreateWithoutFriendsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateOneWithoutRequestsInput {
+  create: UserCreateWithoutRequestsInput
+  connect: UserWhereUniqueInput
+}
+
+input UserCreateWithoutFriendsInput {
   name: String!
   email: String!
   about: String!
   password: String!
-  interests: ZuserCreateinterestsInput
-  friends: ZfriendshipCreateManyInput
+  interests: UserCreateinterestsInput
+  requests: RequestCreateManyWithoutAuthorInput
+  inbox: OfferCreateManyInput
+}
+
+input UserCreateWithoutRequestsInput {
+  name: String!
+  email: String!
+  about: String!
+  password: String!
+  interests: UserCreateinterestsInput
+  friends: FriendshipCreateManyWithoutFriendInput
   inbox: OfferCreateManyInput
 }
 
 """An edge in a connection."""
-type ZuserEdge {
+type UserEdge {
   """The item at the end of the edge."""
-  node: Zuser!
+  node: User!
 
   """A cursor for use in pagination."""
   cursor: String!
 }
 
-enum ZuserOrderByInput {
+enum UserOrderByInput {
   id_ASC
   id_DESC
   name_ASC
@@ -2604,7 +1543,7 @@ enum ZuserOrderByInput {
   createdAt_DESC
 }
 
-type ZuserPreviousValues {
+type UserPreviousValues {
   id: ID!
   name: String!
   email: String!
@@ -2613,22 +1552,22 @@ type ZuserPreviousValues {
   interests: [String!]!
 }
 
-type ZuserSubscriptionPayload {
+type UserSubscriptionPayload {
   mutation: MutationType!
-  node: Zuser
+  node: User
   updatedFields: [String!]
-  previousValues: ZuserPreviousValues
+  previousValues: UserPreviousValues
 }
 
-input ZuserSubscriptionWhereInput {
+input UserSubscriptionWhereInput {
   """Logical AND on all given filters."""
-  AND: [ZuserSubscriptionWhereInput!]
+  AND: [UserSubscriptionWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ZuserSubscriptionWhereInput!]
+  OR: [UserSubscriptionWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ZuserSubscriptionWhereInput!]
+  NOT: [UserSubscriptionWhereInput!]
 
   """
   The subscription event gets dispatched when it's listed in mutation_in
@@ -2649,87 +1588,123 @@ input ZuserSubscriptionWhereInput {
   The subscription event gets only dispatched when some of the field names included in this list have been updated
   """
   updatedFields_contains_some: [String!]
-  node: ZuserWhereInput
+  node: UserWhereInput
 }
 
-input ZuserUpdateDataInput {
+input UserUpdateDataInput {
   name: String
   email: String
   about: String
   password: String
-  interests: ZuserUpdateinterestsInput
-  friends: ZfriendshipUpdateManyInput
-  requests: ZrequestUpdateManyWithoutAuthorInput
+  interests: UserUpdateinterestsInput
+  friends: FriendshipUpdateManyWithoutFriendInput
+  requests: RequestUpdateManyWithoutAuthorInput
   inbox: OfferUpdateManyInput
 }
 
-input ZuserUpdateInput {
+input UserUpdateInput {
   name: String
   email: String
   about: String
   password: String
-  interests: ZuserUpdateinterestsInput
-  friends: ZfriendshipUpdateManyInput
-  requests: ZrequestUpdateManyWithoutAuthorInput
+  interests: UserUpdateinterestsInput
+  friends: FriendshipUpdateManyWithoutFriendInput
+  requests: RequestUpdateManyWithoutAuthorInput
   inbox: OfferUpdateManyInput
 }
 
-input ZuserUpdateinterestsInput {
+input UserUpdateinterestsInput {
   set: [String!]
 }
 
-input ZuserUpdateManyInput {
-  create: [ZuserCreateInput!]
-  connect: [ZuserWhereUniqueInput!]
-  disconnect: [ZuserWhereUniqueInput!]
-  delete: [ZuserWhereUniqueInput!]
-  update: [ZuserUpdateWithWhereUniqueNestedInput!]
-  upsert: [ZuserUpsertWithWhereUniqueNestedInput!]
+input UserUpdateManyInput {
+  create: [UserCreateInput!]
+  connect: [UserWhereUniqueInput!]
+  disconnect: [UserWhereUniqueInput!]
+  delete: [UserWhereUniqueInput!]
+  update: [UserUpdateWithWhereUniqueNestedInput!]
+  upsert: [UserUpsertWithWhereUniqueNestedInput!]
 }
 
-input ZuserUpdateOneWithoutRequestsInput {
-  create: ZuserCreateWithoutRequestsInput
-  connect: ZuserWhereUniqueInput
+input UserUpdateOneInput {
+  create: UserCreateInput
+  connect: UserWhereUniqueInput
   delete: Boolean
-  update: ZuserUpdateWithoutRequestsDataInput
-  upsert: ZuserUpsertWithoutRequestsInput
+  update: UserUpdateDataInput
+  upsert: UserUpsertNestedInput
 }
 
-input ZuserUpdateWithoutRequestsDataInput {
+input UserUpdateOneWithoutFriendsInput {
+  create: UserCreateWithoutFriendsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutFriendsDataInput
+  upsert: UserUpsertWithoutFriendsInput
+}
+
+input UserUpdateOneWithoutRequestsInput {
+  create: UserCreateWithoutRequestsInput
+  connect: UserWhereUniqueInput
+  delete: Boolean
+  update: UserUpdateWithoutRequestsDataInput
+  upsert: UserUpsertWithoutRequestsInput
+}
+
+input UserUpdateWithoutFriendsDataInput {
   name: String
   email: String
   about: String
   password: String
-  interests: ZuserUpdateinterestsInput
-  friends: ZfriendshipUpdateManyInput
+  interests: UserUpdateinterestsInput
+  requests: RequestUpdateManyWithoutAuthorInput
   inbox: OfferUpdateManyInput
 }
 
-input ZuserUpdateWithWhereUniqueNestedInput {
-  where: ZuserWhereUniqueInput!
-  data: ZuserUpdateDataInput!
+input UserUpdateWithoutRequestsDataInput {
+  name: String
+  email: String
+  about: String
+  password: String
+  interests: UserUpdateinterestsInput
+  friends: FriendshipUpdateManyWithoutFriendInput
+  inbox: OfferUpdateManyInput
 }
 
-input ZuserUpsertWithoutRequestsInput {
-  update: ZuserUpdateWithoutRequestsDataInput!
-  create: ZuserCreateWithoutRequestsInput!
+input UserUpdateWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
+  data: UserUpdateDataInput!
 }
 
-input ZuserUpsertWithWhereUniqueNestedInput {
-  where: ZuserWhereUniqueInput!
-  update: ZuserUpdateDataInput!
-  create: ZuserCreateInput!
+input UserUpsertNestedInput {
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
 }
 
-input ZuserWhereInput {
+input UserUpsertWithoutFriendsInput {
+  update: UserUpdateWithoutFriendsDataInput!
+  create: UserCreateWithoutFriendsInput!
+}
+
+input UserUpsertWithoutRequestsInput {
+  update: UserUpdateWithoutRequestsDataInput!
+  create: UserCreateWithoutRequestsInput!
+}
+
+input UserUpsertWithWhereUniqueNestedInput {
+  where: UserWhereUniqueInput!
+  update: UserUpdateDataInput!
+  create: UserCreateInput!
+}
+
+input UserWhereInput {
   """Logical AND on all given filters."""
-  AND: [ZuserWhereInput!]
+  AND: [UserWhereInput!]
 
   """Logical OR on all given filters."""
-  OR: [ZuserWhereInput!]
+  OR: [UserWhereInput!]
 
   """Logical NOT on all given filters combined by AND."""
-  NOT: [ZuserWhereInput!]
+  NOT: [UserWhereInput!]
   id: ID
 
   """All values that are not equal to given value."""
@@ -2930,21 +1905,24 @@ input ZuserWhereInput {
 
   """All values not ending with the given string."""
   password_not_ends_with: String
-  friends_every: ZfriendshipWhereInput
-  friends_some: ZfriendshipWhereInput
-  friends_none: ZfriendshipWhereInput
-  requests_every: ZrequestWhereInput
-  requests_some: ZrequestWhereInput
-  requests_none: ZrequestWhereInput
+  friends_every: FriendshipWhereInput
+  friends_some: FriendshipWhereInput
+  friends_none: FriendshipWhereInput
+  requests_every: RequestWhereInput
+  requests_some: RequestWhereInput
+  requests_none: RequestWhereInput
   inbox_every: OfferWhereInput
   inbox_some: OfferWhereInput
   inbox_none: OfferWhereInput
-  _MagicalBackRelation_ZsellerToZuser_every: ZsellerWhereInput
-  _MagicalBackRelation_ZsellerToZuser_some: ZsellerWhereInput
-  _MagicalBackRelation_ZsellerToZuser_none: ZsellerWhereInput
+  _MagicalBackRelation_SellerIdentityRelation_every: SellerWhereInput
+  _MagicalBackRelation_SellerIdentityRelation_some: SellerWhereInput
+  _MagicalBackRelation_SellerIdentityRelation_none: SellerWhereInput
+  _MagicalBackRelation_SellerPatronsRelation_every: SellerWhereInput
+  _MagicalBackRelation_SellerPatronsRelation_some: SellerWhereInput
+  _MagicalBackRelation_SellerPatronsRelation_none: SellerWhereInput
 }
 
-input ZuserWhereUniqueInput {
+input UserWhereUniqueInput {
   id: ID
   email: String
 }
