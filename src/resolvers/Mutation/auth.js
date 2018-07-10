@@ -7,6 +7,14 @@ function createToken(userId) {
   return jwt.sign({ userId, expiresIn: "7d" }, process.env.APP_SECRET)
 }
 
+function clearLog(text, item) {
+  console.log(`
+
+    ######### ${text} ########
+
+  `, item)  
+}
+
 const auth = {
   async refreshToken(parent, args, ctx, info) {
 

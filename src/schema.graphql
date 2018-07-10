@@ -1,4 +1,4 @@
-# import Post, Offer from "./generated/prisma.graphql"
+# import Post, Offer, User from "./generated/prisma.graphql"
 # import OfferWhereInput, OfferOrderByInput from "./generated/prisma.graphql"
 # import OfferWhereUniqueInput from "./generated/prisma.graphql"
 # import Query.offersConnection from "./generated/prisma.graphql"
@@ -9,6 +9,7 @@
 # import Mutation.deleteZoffer from "./generated/prisma.graphql"
 # import Mutation.createZseller from "./generated/prisma.graphql"
 # import Mutation.deleteZseller from "./generated/prisma.graphql"
+# import Mutation.updateUser from "./generated/prisma.graphql"
 
 type Query {
   offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
@@ -36,10 +37,6 @@ type Mutation {
   updateOffer(id: ID!, title: String, text: String): Offer
 }
 
-type Subscription {
-  feedSubscription: PostSubscriptionPayload!
-}
-
 type AuthPayload {
   token: String!
   user: User!
@@ -55,9 +52,14 @@ type Error {
   msg: String!
 }
 
-type User {
-  id: ID!
-  email: String!
-  name: String!
-  posts: [Post!]!
+# type User {
+#   id: ID!
+#   about: String
+#   email: String!
+#   name: String!
+#   posts: [Post!]!
+# }
+
+type Subscription {
+  feedSubscription: PostSubscriptionPayload!
 }

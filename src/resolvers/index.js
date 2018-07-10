@@ -6,10 +6,12 @@ const { offer } = require('./Mutation/offer')
 const { AuthPayload } = require('./AuthPayload')
 const { zoffer } = require('./Mutation/zoffer')
 const { zseller } = require('./Mutation/zseller')
+const { user } = require('./Mutation/user')
 
 module.exports = {
   Query,
   Mutation: {
+    ...user,
     ...auth,
     ...post,
     ...offer,

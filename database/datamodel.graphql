@@ -19,12 +19,15 @@ type Offer {
 
 type User {
   id: ID! @unique
-  email: String! @unique
-  password: String!
   name: String!
-  posts: [Post!]!
+  email: String! @unique
+  about: String
+  password: String!
+  friends: [Zfriendship!]!
+  interests: [String!]!
+  requests: [Zrequest!]!
+  inbox: [Zoffer!]!
 }
-
 
 type Zuser {
   id: ID! @unique
@@ -35,7 +38,7 @@ type Zuser {
   friends: [Zfriendship!]!
   interests: [String!]!
   requests: [Zrequest!]!
-  inbox: [Offer!]!
+  inbox: [Zoffer!]!
 }
 
 type Zoffer {

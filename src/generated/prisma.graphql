@@ -1,5 +1,5 @@
-# source: https://us1.prisma.sh/brian-cilenti-1f9206/prisma-junk/dev
-# timestamp: Mon Jul 09 2018 14:27:27 GMT-0700 (Pacific Daylight Time)
+# source: https://us1.prisma.sh/brian-cilenti-1f9206/daffy-duck/dev
+# timestamp: Tue Jul 10 2018 14:08:13 GMT-0700 (Pacific Daylight Time)
 
 type AggregateOffer {
   count: Int!
@@ -48,52 +48,52 @@ scalar Long
 
 type Mutation {
   createPost(data: PostCreateInput!): Post!
-  createZoffer(data: ZofferCreateInput!): Zoffer!
-  createZrequest(data: ZrequestCreateInput!): Zrequest!
-  createZfriendship(data: ZfriendshipCreateInput!): Zfriendship!
-  createZseller(data: ZsellerCreateInput!): Zseller!
-  createUser(data: UserCreateInput!): User!
   createOffer(data: OfferCreateInput!): Offer!
+  createZrequest(data: ZrequestCreateInput!): Zrequest!
+  createZseller(data: ZsellerCreateInput!): Zseller!
+  createZoffer(data: ZofferCreateInput!): Zoffer!
+  createUser(data: UserCreateInput!): User!
+  createZfriendship(data: ZfriendshipCreateInput!): Zfriendship!
   createZuser(data: ZuserCreateInput!): Zuser!
   updatePost(data: PostUpdateInput!, where: PostWhereUniqueInput!): Post
-  updateZoffer(data: ZofferUpdateInput!, where: ZofferWhereUniqueInput!): Zoffer
-  updateZrequest(data: ZrequestUpdateInput!, where: ZrequestWhereUniqueInput!): Zrequest
-  updateZfriendship(data: ZfriendshipUpdateInput!, where: ZfriendshipWhereUniqueInput!): Zfriendship
-  updateZseller(data: ZsellerUpdateInput!, where: ZsellerWhereUniqueInput!): Zseller
-  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
   updateOffer(data: OfferUpdateInput!, where: OfferWhereUniqueInput!): Offer
+  updateZrequest(data: ZrequestUpdateInput!, where: ZrequestWhereUniqueInput!): Zrequest
+  updateZseller(data: ZsellerUpdateInput!, where: ZsellerWhereUniqueInput!): Zseller
+  updateZoffer(data: ZofferUpdateInput!, where: ZofferWhereUniqueInput!): Zoffer
+  updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
+  updateZfriendship(data: ZfriendshipUpdateInput!, where: ZfriendshipWhereUniqueInput!): Zfriendship
   updateZuser(data: ZuserUpdateInput!, where: ZuserWhereUniqueInput!): Zuser
   deletePost(where: PostWhereUniqueInput!): Post
-  deleteZoffer(where: ZofferWhereUniqueInput!): Zoffer
-  deleteZrequest(where: ZrequestWhereUniqueInput!): Zrequest
-  deleteZfriendship(where: ZfriendshipWhereUniqueInput!): Zfriendship
-  deleteZseller(where: ZsellerWhereUniqueInput!): Zseller
-  deleteUser(where: UserWhereUniqueInput!): User
   deleteOffer(where: OfferWhereUniqueInput!): Offer
+  deleteZrequest(where: ZrequestWhereUniqueInput!): Zrequest
+  deleteZseller(where: ZsellerWhereUniqueInput!): Zseller
+  deleteZoffer(where: ZofferWhereUniqueInput!): Zoffer
+  deleteUser(where: UserWhereUniqueInput!): User
+  deleteZfriendship(where: ZfriendshipWhereUniqueInput!): Zfriendship
   deleteZuser(where: ZuserWhereUniqueInput!): Zuser
   upsertPost(where: PostWhereUniqueInput!, create: PostCreateInput!, update: PostUpdateInput!): Post!
-  upsertZoffer(where: ZofferWhereUniqueInput!, create: ZofferCreateInput!, update: ZofferUpdateInput!): Zoffer!
-  upsertZrequest(where: ZrequestWhereUniqueInput!, create: ZrequestCreateInput!, update: ZrequestUpdateInput!): Zrequest!
-  upsertZfriendship(where: ZfriendshipWhereUniqueInput!, create: ZfriendshipCreateInput!, update: ZfriendshipUpdateInput!): Zfriendship!
-  upsertZseller(where: ZsellerWhereUniqueInput!, create: ZsellerCreateInput!, update: ZsellerUpdateInput!): Zseller!
-  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
   upsertOffer(where: OfferWhereUniqueInput!, create: OfferCreateInput!, update: OfferUpdateInput!): Offer!
+  upsertZrequest(where: ZrequestWhereUniqueInput!, create: ZrequestCreateInput!, update: ZrequestUpdateInput!): Zrequest!
+  upsertZseller(where: ZsellerWhereUniqueInput!, create: ZsellerCreateInput!, update: ZsellerUpdateInput!): Zseller!
+  upsertZoffer(where: ZofferWhereUniqueInput!, create: ZofferCreateInput!, update: ZofferUpdateInput!): Zoffer!
+  upsertUser(where: UserWhereUniqueInput!, create: UserCreateInput!, update: UserUpdateInput!): User!
+  upsertZfriendship(where: ZfriendshipWhereUniqueInput!, create: ZfriendshipCreateInput!, update: ZfriendshipUpdateInput!): Zfriendship!
   upsertZuser(where: ZuserWhereUniqueInput!, create: ZuserCreateInput!, update: ZuserUpdateInput!): Zuser!
   updateManyPosts(data: PostUpdateInput!, where: PostWhereInput): BatchPayload!
-  updateManyZoffers(data: ZofferUpdateInput!, where: ZofferWhereInput): BatchPayload!
-  updateManyZrequests(data: ZrequestUpdateInput!, where: ZrequestWhereInput): BatchPayload!
-  updateManyZfriendships(data: ZfriendshipUpdateInput!, where: ZfriendshipWhereInput): BatchPayload!
-  updateManyZsellers(data: ZsellerUpdateInput!, where: ZsellerWhereInput): BatchPayload!
-  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
   updateManyOffers(data: OfferUpdateInput!, where: OfferWhereInput): BatchPayload!
+  updateManyZrequests(data: ZrequestUpdateInput!, where: ZrequestWhereInput): BatchPayload!
+  updateManyZsellers(data: ZsellerUpdateInput!, where: ZsellerWhereInput): BatchPayload!
+  updateManyZoffers(data: ZofferUpdateInput!, where: ZofferWhereInput): BatchPayload!
+  updateManyUsers(data: UserUpdateInput!, where: UserWhereInput): BatchPayload!
+  updateManyZfriendships(data: ZfriendshipUpdateInput!, where: ZfriendshipWhereInput): BatchPayload!
   updateManyZusers(data: ZuserUpdateInput!, where: ZuserWhereInput): BatchPayload!
   deleteManyPosts(where: PostWhereInput): BatchPayload!
-  deleteManyZoffers(where: ZofferWhereInput): BatchPayload!
-  deleteManyZrequests(where: ZrequestWhereInput): BatchPayload!
-  deleteManyZfriendships(where: ZfriendshipWhereInput): BatchPayload!
-  deleteManyZsellers(where: ZsellerWhereInput): BatchPayload!
-  deleteManyUsers(where: UserWhereInput): BatchPayload!
   deleteManyOffers(where: OfferWhereInput): BatchPayload!
+  deleteManyZrequests(where: ZrequestWhereInput): BatchPayload!
+  deleteManyZsellers(where: ZsellerWhereInput): BatchPayload!
+  deleteManyZoffers(where: ZofferWhereInput): BatchPayload!
+  deleteManyUsers(where: UserWhereInput): BatchPayload!
+  deleteManyZfriendships(where: ZfriendshipWhereInput): BatchPayload!
   deleteManyZusers(where: ZuserWhereInput): BatchPayload!
 }
 
@@ -132,11 +132,6 @@ input OfferCreateInput {
   title: String!
   text: String!
   author: UserCreateOneInput!
-}
-
-input OfferCreateManyInput {
-  create: [OfferCreateInput!]
-  connect: [OfferWhereUniqueInput!]
 }
 
 """An edge in a connection."""
@@ -208,36 +203,10 @@ input OfferSubscriptionWhereInput {
   node: OfferWhereInput
 }
 
-input OfferUpdateDataInput {
-  title: String
-  text: String
-  author: UserUpdateOneInput
-}
-
 input OfferUpdateInput {
   title: String
   text: String
   author: UserUpdateOneInput
-}
-
-input OfferUpdateManyInput {
-  create: [OfferCreateInput!]
-  connect: [OfferWhereUniqueInput!]
-  disconnect: [OfferWhereUniqueInput!]
-  delete: [OfferWhereUniqueInput!]
-  update: [OfferUpdateWithWhereUniqueNestedInput!]
-  upsert: [OfferUpsertWithWhereUniqueNestedInput!]
-}
-
-input OfferUpdateWithWhereUniqueNestedInput {
-  where: OfferWhereUniqueInput!
-  data: OfferUpdateDataInput!
-}
-
-input OfferUpsertWithWhereUniqueNestedInput {
-  where: OfferWhereUniqueInput!
-  update: OfferUpdateDataInput!
-  create: OfferCreateInput!
 }
 
 input OfferWhereInput {
@@ -414,9 +383,6 @@ input OfferWhereInput {
   """All values not ending with the given string."""
   text_not_ends_with: String
   author: UserWhereInput
-  _MagicalBackRelation_OfferToZuser_every: ZuserWhereInput
-  _MagicalBackRelation_OfferToZuser_some: ZuserWhereInput
-  _MagicalBackRelation_OfferToZuser_none: ZuserWhereInput
 }
 
 input OfferWhereUniqueInput {
@@ -462,18 +428,7 @@ input PostCreateInput {
   title: String!
   text: String!
   isPublished: Boolean
-  author: UserCreateOneWithoutPostsInput!
-}
-
-input PostCreateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connect: [PostWhereUniqueInput!]
-}
-
-input PostCreateWithoutAuthorInput {
-  title: String!
-  text: String!
-  isPublished: Boolean
+  author: UserCreateOneInput!
 }
 
 """An edge in a connection."""
@@ -552,33 +507,7 @@ input PostUpdateInput {
   title: String
   text: String
   isPublished: Boolean
-  author: UserUpdateOneWithoutPostsInput
-}
-
-input PostUpdateManyWithoutAuthorInput {
-  create: [PostCreateWithoutAuthorInput!]
-  connect: [PostWhereUniqueInput!]
-  disconnect: [PostWhereUniqueInput!]
-  delete: [PostWhereUniqueInput!]
-  update: [PostUpdateWithWhereUniqueWithoutAuthorInput!]
-  upsert: [PostUpsertWithWhereUniqueWithoutAuthorInput!]
-}
-
-input PostUpdateWithoutAuthorDataInput {
-  title: String
-  text: String
-  isPublished: Boolean
-}
-
-input PostUpdateWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  data: PostUpdateWithoutAuthorDataInput!
-}
-
-input PostUpsertWithWhereUniqueWithoutAuthorInput {
-  where: PostWhereUniqueInput!
-  update: PostUpdateWithoutAuthorDataInput!
-  create: PostCreateWithoutAuthorInput!
+  author: UserUpdateOneInput
 }
 
 input PostWhereInput {
@@ -767,28 +696,28 @@ input PostWhereUniqueInput {
 
 type Query {
   posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post]!
-  zoffers(where: ZofferWhereInput, orderBy: ZofferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zoffer]!
-  zrequests(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zrequest]!
-  zfriendships(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zfriendship]!
-  zsellers(where: ZsellerWhereInput, orderBy: ZsellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zseller]!
-  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
   offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
+  zrequests(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zrequest]!
+  zsellers(where: ZsellerWhereInput, orderBy: ZsellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zseller]!
+  zoffers(where: ZofferWhereInput, orderBy: ZofferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zoffer]!
+  users(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [User]!
+  zfriendships(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zfriendship]!
   zusers(where: ZuserWhereInput, orderBy: ZuserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zuser]!
   post(where: PostWhereUniqueInput!): Post
-  zoffer(where: ZofferWhereUniqueInput!): Zoffer
-  zrequest(where: ZrequestWhereUniqueInput!): Zrequest
-  zfriendship(where: ZfriendshipWhereUniqueInput!): Zfriendship
-  zseller(where: ZsellerWhereUniqueInput!): Zseller
-  user(where: UserWhereUniqueInput!): User
   offer(where: OfferWhereUniqueInput!): Offer
+  zrequest(where: ZrequestWhereUniqueInput!): Zrequest
+  zseller(where: ZsellerWhereUniqueInput!): Zseller
+  zoffer(where: ZofferWhereUniqueInput!): Zoffer
+  user(where: UserWhereUniqueInput!): User
+  zfriendship(where: ZfriendshipWhereUniqueInput!): Zfriendship
   zuser(where: ZuserWhereUniqueInput!): Zuser
   postsConnection(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): PostConnection!
-  zoffersConnection(where: ZofferWhereInput, orderBy: ZofferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZofferConnection!
-  zrequestsConnection(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZrequestConnection!
-  zfriendshipsConnection(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZfriendshipConnection!
-  zsellersConnection(where: ZsellerWhereInput, orderBy: ZsellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZsellerConnection!
-  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
   offersConnection(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): OfferConnection!
+  zrequestsConnection(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZrequestConnection!
+  zsellersConnection(where: ZsellerWhereInput, orderBy: ZsellerOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZsellerConnection!
+  zoffersConnection(where: ZofferWhereInput, orderBy: ZofferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZofferConnection!
+  usersConnection(where: UserWhereInput, orderBy: UserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): UserConnection!
+  zfriendshipsConnection(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZfriendshipConnection!
   zusersConnection(where: ZuserWhereInput, orderBy: ZuserOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ZuserConnection!
 
   """Fetches an object given its ID"""
@@ -800,21 +729,25 @@ type Query {
 
 type Subscription {
   post(where: PostSubscriptionWhereInput): PostSubscriptionPayload
-  zoffer(where: ZofferSubscriptionWhereInput): ZofferSubscriptionPayload
-  zrequest(where: ZrequestSubscriptionWhereInput): ZrequestSubscriptionPayload
-  zfriendship(where: ZfriendshipSubscriptionWhereInput): ZfriendshipSubscriptionPayload
-  zseller(where: ZsellerSubscriptionWhereInput): ZsellerSubscriptionPayload
-  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
   offer(where: OfferSubscriptionWhereInput): OfferSubscriptionPayload
+  zrequest(where: ZrequestSubscriptionWhereInput): ZrequestSubscriptionPayload
+  zseller(where: ZsellerSubscriptionWhereInput): ZsellerSubscriptionPayload
+  zoffer(where: ZofferSubscriptionWhereInput): ZofferSubscriptionPayload
+  user(where: UserSubscriptionWhereInput): UserSubscriptionPayload
+  zfriendship(where: ZfriendshipSubscriptionWhereInput): ZfriendshipSubscriptionPayload
   zuser(where: ZuserSubscriptionWhereInput): ZuserSubscriptionPayload
 }
 
 type User implements Node {
   id: ID!
-  email: String!
-  password: String!
   name: String!
-  posts(where: PostWhereInput, orderBy: PostOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Post!]
+  email: String!
+  about: String
+  password: String!
+  friends(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zfriendship!]
+  interests: [String!]!
+  requests(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zrequest!]
+  inbox(where: ZofferWhereInput, orderBy: ZofferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zoffer!]
 }
 
 """A connection to a list of items."""
@@ -828,26 +761,23 @@ type UserConnection {
 }
 
 input UserCreateInput {
-  email: String!
-  password: String!
   name: String!
-  posts: PostCreateManyWithoutAuthorInput
+  email: String!
+  about: String
+  password: String!
+  interests: UserCreateinterestsInput
+  friends: ZfriendshipCreateManyInput
+  requests: ZrequestCreateManyInput
+  inbox: ZofferCreateManyInput
+}
+
+input UserCreateinterestsInput {
+  set: [String!]
 }
 
 input UserCreateOneInput {
   create: UserCreateInput
   connect: UserWhereUniqueInput
-}
-
-input UserCreateOneWithoutPostsInput {
-  create: UserCreateWithoutPostsInput
-  connect: UserWhereUniqueInput
-}
-
-input UserCreateWithoutPostsInput {
-  email: String!
-  password: String!
-  name: String!
 }
 
 """An edge in a connection."""
@@ -862,12 +792,14 @@ type UserEdge {
 enum UserOrderByInput {
   id_ASC
   id_DESC
-  email_ASC
-  email_DESC
-  password_ASC
-  password_DESC
   name_ASC
   name_DESC
+  email_ASC
+  email_DESC
+  about_ASC
+  about_DESC
+  password_ASC
+  password_DESC
   updatedAt_ASC
   updatedAt_DESC
   createdAt_ASC
@@ -876,9 +808,11 @@ enum UserOrderByInput {
 
 type UserPreviousValues {
   id: ID!
-  email: String!
-  password: String!
   name: String!
+  email: String!
+  about: String
+  password: String!
+  interests: [String!]!
 }
 
 type UserSubscriptionPayload {
@@ -921,17 +855,29 @@ input UserSubscriptionWhereInput {
 }
 
 input UserUpdateDataInput {
-  email: String
-  password: String
   name: String
-  posts: PostUpdateManyWithoutAuthorInput
+  email: String
+  about: String
+  password: String
+  interests: UserUpdateinterestsInput
+  friends: ZfriendshipUpdateManyInput
+  requests: ZrequestUpdateManyInput
+  inbox: ZofferUpdateManyInput
 }
 
 input UserUpdateInput {
-  email: String
-  password: String
   name: String
-  posts: PostUpdateManyWithoutAuthorInput
+  email: String
+  about: String
+  password: String
+  interests: UserUpdateinterestsInput
+  friends: ZfriendshipUpdateManyInput
+  requests: ZrequestUpdateManyInput
+  inbox: ZofferUpdateManyInput
+}
+
+input UserUpdateinterestsInput {
+  set: [String!]
 }
 
 input UserUpdateOneInput {
@@ -942,28 +888,9 @@ input UserUpdateOneInput {
   upsert: UserUpsertNestedInput
 }
 
-input UserUpdateOneWithoutPostsInput {
-  create: UserCreateWithoutPostsInput
-  connect: UserWhereUniqueInput
-  delete: Boolean
-  update: UserUpdateWithoutPostsDataInput
-  upsert: UserUpsertWithoutPostsInput
-}
-
-input UserUpdateWithoutPostsDataInput {
-  email: String
-  password: String
-  name: String
-}
-
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
-}
-
-input UserUpsertWithoutPostsInput {
-  update: UserUpdateWithoutPostsDataInput!
-  create: UserCreateWithoutPostsInput!
 }
 
 input UserWhereInput {
@@ -1015,86 +942,6 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  email: String
-
-  """All values that are not equal to given value."""
-  email_not: String
-
-  """All values that are contained in given list."""
-  email_in: [String!]
-
-  """All values that are not contained in given list."""
-  email_not_in: [String!]
-
-  """All values less than the given value."""
-  email_lt: String
-
-  """All values less than or equal the given value."""
-  email_lte: String
-
-  """All values greater than the given value."""
-  email_gt: String
-
-  """All values greater than or equal the given value."""
-  email_gte: String
-
-  """All values containing the given string."""
-  email_contains: String
-
-  """All values not containing the given string."""
-  email_not_contains: String
-
-  """All values starting with the given string."""
-  email_starts_with: String
-
-  """All values not starting with the given string."""
-  email_not_starts_with: String
-
-  """All values ending with the given string."""
-  email_ends_with: String
-
-  """All values not ending with the given string."""
-  email_not_ends_with: String
-  password: String
-
-  """All values that are not equal to given value."""
-  password_not: String
-
-  """All values that are contained in given list."""
-  password_in: [String!]
-
-  """All values that are not contained in given list."""
-  password_not_in: [String!]
-
-  """All values less than the given value."""
-  password_lt: String
-
-  """All values less than or equal the given value."""
-  password_lte: String
-
-  """All values greater than the given value."""
-  password_gt: String
-
-  """All values greater than or equal the given value."""
-  password_gte: String
-
-  """All values containing the given string."""
-  password_contains: String
-
-  """All values not containing the given string."""
-  password_not_contains: String
-
-  """All values starting with the given string."""
-  password_starts_with: String
-
-  """All values not starting with the given string."""
-  password_not_starts_with: String
-
-  """All values ending with the given string."""
-  password_ends_with: String
-
-  """All values not ending with the given string."""
-  password_not_ends_with: String
   name: String
 
   """All values that are not equal to given value."""
@@ -1135,9 +982,138 @@ input UserWhereInput {
 
   """All values not ending with the given string."""
   name_not_ends_with: String
-  posts_every: PostWhereInput
-  posts_some: PostWhereInput
-  posts_none: PostWhereInput
+  email: String
+
+  """All values that are not equal to given value."""
+  email_not: String
+
+  """All values that are contained in given list."""
+  email_in: [String!]
+
+  """All values that are not contained in given list."""
+  email_not_in: [String!]
+
+  """All values less than the given value."""
+  email_lt: String
+
+  """All values less than or equal the given value."""
+  email_lte: String
+
+  """All values greater than the given value."""
+  email_gt: String
+
+  """All values greater than or equal the given value."""
+  email_gte: String
+
+  """All values containing the given string."""
+  email_contains: String
+
+  """All values not containing the given string."""
+  email_not_contains: String
+
+  """All values starting with the given string."""
+  email_starts_with: String
+
+  """All values not starting with the given string."""
+  email_not_starts_with: String
+
+  """All values ending with the given string."""
+  email_ends_with: String
+
+  """All values not ending with the given string."""
+  email_not_ends_with: String
+  about: String
+
+  """All values that are not equal to given value."""
+  about_not: String
+
+  """All values that are contained in given list."""
+  about_in: [String!]
+
+  """All values that are not contained in given list."""
+  about_not_in: [String!]
+
+  """All values less than the given value."""
+  about_lt: String
+
+  """All values less than or equal the given value."""
+  about_lte: String
+
+  """All values greater than the given value."""
+  about_gt: String
+
+  """All values greater than or equal the given value."""
+  about_gte: String
+
+  """All values containing the given string."""
+  about_contains: String
+
+  """All values not containing the given string."""
+  about_not_contains: String
+
+  """All values starting with the given string."""
+  about_starts_with: String
+
+  """All values not starting with the given string."""
+  about_not_starts_with: String
+
+  """All values ending with the given string."""
+  about_ends_with: String
+
+  """All values not ending with the given string."""
+  about_not_ends_with: String
+  password: String
+
+  """All values that are not equal to given value."""
+  password_not: String
+
+  """All values that are contained in given list."""
+  password_in: [String!]
+
+  """All values that are not contained in given list."""
+  password_not_in: [String!]
+
+  """All values less than the given value."""
+  password_lt: String
+
+  """All values less than or equal the given value."""
+  password_lte: String
+
+  """All values greater than the given value."""
+  password_gt: String
+
+  """All values greater than or equal the given value."""
+  password_gte: String
+
+  """All values containing the given string."""
+  password_contains: String
+
+  """All values not containing the given string."""
+  password_not_contains: String
+
+  """All values starting with the given string."""
+  password_starts_with: String
+
+  """All values not starting with the given string."""
+  password_not_starts_with: String
+
+  """All values ending with the given string."""
+  password_ends_with: String
+
+  """All values not ending with the given string."""
+  password_not_ends_with: String
+  friends_every: ZfriendshipWhereInput
+  friends_some: ZfriendshipWhereInput
+  friends_none: ZfriendshipWhereInput
+  requests_every: ZrequestWhereInput
+  requests_some: ZrequestWhereInput
+  requests_none: ZrequestWhereInput
+  inbox_every: ZofferWhereInput
+  inbox_some: ZofferWhereInput
+  inbox_none: ZofferWhereInput
+  _MagicalBackRelation_PostToUser_every: PostWhereInput
+  _MagicalBackRelation_PostToUser_some: PostWhereInput
+  _MagicalBackRelation_PostToUser_none: PostWhereInput
   _MagicalBackRelation_OfferToUser_every: OfferWhereInput
   _MagicalBackRelation_OfferToUser_some: OfferWhereInput
   _MagicalBackRelation_OfferToUser_none: OfferWhereInput
@@ -1404,6 +1380,9 @@ input ZfriendshipWhereInput {
   _MagicalBackRelation_ZfriendshipToZuser_every: ZuserWhereInput
   _MagicalBackRelation_ZfriendshipToZuser_some: ZuserWhereInput
   _MagicalBackRelation_ZfriendshipToZuser_none: ZuserWhereInput
+  _MagicalBackRelation_UserToZfriendship_every: UserWhereInput
+  _MagicalBackRelation_UserToZfriendship_some: UserWhereInput
+  _MagicalBackRelation_UserToZfriendship_none: UserWhereInput
 }
 
 input ZfriendshipWhereUniqueInput {
@@ -1435,6 +1414,11 @@ input ZofferCreateInput {
   title: String!
   text: String!
   author: ZsellerCreateOneInput!
+}
+
+input ZofferCreateManyInput {
+  create: [ZofferCreateInput!]
+  connect: [ZofferWhereUniqueInput!]
 }
 
 """An edge in a connection."""
@@ -1509,11 +1493,38 @@ input ZofferSubscriptionWhereInput {
   node: ZofferWhereInput
 }
 
+input ZofferUpdateDataInput {
+  expiresAt: DateTime
+  title: String
+  text: String
+  author: ZsellerUpdateOneInput
+}
+
 input ZofferUpdateInput {
   expiresAt: DateTime
   title: String
   text: String
   author: ZsellerUpdateOneInput
+}
+
+input ZofferUpdateManyInput {
+  create: [ZofferCreateInput!]
+  connect: [ZofferWhereUniqueInput!]
+  disconnect: [ZofferWhereUniqueInput!]
+  delete: [ZofferWhereUniqueInput!]
+  update: [ZofferUpdateWithWhereUniqueNestedInput!]
+  upsert: [ZofferUpsertWithWhereUniqueNestedInput!]
+}
+
+input ZofferUpdateWithWhereUniqueNestedInput {
+  where: ZofferWhereUniqueInput!
+  data: ZofferUpdateDataInput!
+}
+
+input ZofferUpsertWithWhereUniqueNestedInput {
+  where: ZofferWhereUniqueInput!
+  update: ZofferUpdateDataInput!
+  create: ZofferCreateInput!
 }
 
 input ZofferWhereInput {
@@ -1712,6 +1723,12 @@ input ZofferWhereInput {
   """All values not ending with the given string."""
   text_not_ends_with: String
   author: ZsellerWhereInput
+  _MagicalBackRelation_UserToZoffer_every: UserWhereInput
+  _MagicalBackRelation_UserToZoffer_some: UserWhereInput
+  _MagicalBackRelation_UserToZoffer_none: UserWhereInput
+  _MagicalBackRelation_ZofferToZuser_every: ZuserWhereInput
+  _MagicalBackRelation_ZofferToZuser_some: ZuserWhereInput
+  _MagicalBackRelation_ZofferToZuser_none: ZuserWhereInput
 }
 
 input ZofferWhereUniqueInput {
@@ -1747,6 +1764,11 @@ input ZrequestCreateInput {
   wants: ZrequestCreatewantsInput
   to: ZsellerCreateOneWithoutInboxInput!
   author: ZuserCreateOneWithoutRequestsInput!
+}
+
+input ZrequestCreateManyInput {
+  create: [ZrequestCreateInput!]
+  connect: [ZrequestWhereUniqueInput!]
 }
 
 input ZrequestCreateManyWithoutAuthorInput {
@@ -1852,6 +1874,15 @@ input ZrequestSubscriptionWhereInput {
   node: ZrequestWhereInput
 }
 
+input ZrequestUpdateDataInput {
+  title: String
+  text: String
+  isPublished: Boolean
+  wants: ZrequestUpdatewantsInput
+  to: ZsellerUpdateOneWithoutInboxInput
+  author: ZuserUpdateOneWithoutRequestsInput
+}
+
 input ZrequestUpdateInput {
   title: String
   text: String
@@ -1859,6 +1890,15 @@ input ZrequestUpdateInput {
   wants: ZrequestUpdatewantsInput
   to: ZsellerUpdateOneWithoutInboxInput
   author: ZuserUpdateOneWithoutRequestsInput
+}
+
+input ZrequestUpdateManyInput {
+  create: [ZrequestCreateInput!]
+  connect: [ZrequestWhereUniqueInput!]
+  disconnect: [ZrequestWhereUniqueInput!]
+  delete: [ZrequestWhereUniqueInput!]
+  update: [ZrequestUpdateWithWhereUniqueNestedInput!]
+  upsert: [ZrequestUpsertWithWhereUniqueNestedInput!]
 }
 
 input ZrequestUpdateManyWithoutAuthorInput {
@@ -1899,6 +1939,11 @@ input ZrequestUpdateWithoutToDataInput {
   author: ZuserUpdateOneWithoutRequestsInput
 }
 
+input ZrequestUpdateWithWhereUniqueNestedInput {
+  where: ZrequestWhereUniqueInput!
+  data: ZrequestUpdateDataInput!
+}
+
 input ZrequestUpdateWithWhereUniqueWithoutAuthorInput {
   where: ZrequestWhereUniqueInput!
   data: ZrequestUpdateWithoutAuthorDataInput!
@@ -1907,6 +1952,12 @@ input ZrequestUpdateWithWhereUniqueWithoutAuthorInput {
 input ZrequestUpdateWithWhereUniqueWithoutToInput {
   where: ZrequestWhereUniqueInput!
   data: ZrequestUpdateWithoutToDataInput!
+}
+
+input ZrequestUpsertWithWhereUniqueNestedInput {
+  where: ZrequestWhereUniqueInput!
+  update: ZrequestUpdateDataInput!
+  create: ZrequestCreateInput!
 }
 
 input ZrequestUpsertWithWhereUniqueWithoutAuthorInput {
@@ -2100,6 +2151,9 @@ input ZrequestWhereInput {
   isPublished_not: Boolean
   to: ZsellerWhereInput
   author: ZuserWhereInput
+  _MagicalBackRelation_UserToZrequest_every: UserWhereInput
+  _MagicalBackRelation_UserToZrequest_some: UserWhereInput
+  _MagicalBackRelation_UserToZrequest_none: UserWhereInput
 }
 
 input ZrequestWhereUniqueInput {
@@ -2530,7 +2584,7 @@ type Zuser implements Node {
   friends(where: ZfriendshipWhereInput, orderBy: ZfriendshipOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zfriendship!]
   interests: [String!]!
   requests(where: ZrequestWhereInput, orderBy: ZrequestOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zrequest!]
-  inbox(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer!]
+  inbox(where: ZofferWhereInput, orderBy: ZofferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Zoffer!]
 }
 
 """A connection to a list of items."""
@@ -2551,7 +2605,7 @@ input ZuserCreateInput {
   interests: ZuserCreateinterestsInput
   friends: ZfriendshipCreateManyInput
   requests: ZrequestCreateManyWithoutAuthorInput
-  inbox: OfferCreateManyInput
+  inbox: ZofferCreateManyInput
 }
 
 input ZuserCreateinterestsInput {
@@ -2575,7 +2629,7 @@ input ZuserCreateWithoutRequestsInput {
   password: String!
   interests: ZuserCreateinterestsInput
   friends: ZfriendshipCreateManyInput
-  inbox: OfferCreateManyInput
+  inbox: ZofferCreateManyInput
 }
 
 """An edge in a connection."""
@@ -2660,7 +2714,7 @@ input ZuserUpdateDataInput {
   interests: ZuserUpdateinterestsInput
   friends: ZfriendshipUpdateManyInput
   requests: ZrequestUpdateManyWithoutAuthorInput
-  inbox: OfferUpdateManyInput
+  inbox: ZofferUpdateManyInput
 }
 
 input ZuserUpdateInput {
@@ -2671,7 +2725,7 @@ input ZuserUpdateInput {
   interests: ZuserUpdateinterestsInput
   friends: ZfriendshipUpdateManyInput
   requests: ZrequestUpdateManyWithoutAuthorInput
-  inbox: OfferUpdateManyInput
+  inbox: ZofferUpdateManyInput
 }
 
 input ZuserUpdateinterestsInput {
@@ -2702,7 +2756,7 @@ input ZuserUpdateWithoutRequestsDataInput {
   password: String
   interests: ZuserUpdateinterestsInput
   friends: ZfriendshipUpdateManyInput
-  inbox: OfferUpdateManyInput
+  inbox: ZofferUpdateManyInput
 }
 
 input ZuserUpdateWithWhereUniqueNestedInput {
@@ -2936,9 +2990,9 @@ input ZuserWhereInput {
   requests_every: ZrequestWhereInput
   requests_some: ZrequestWhereInput
   requests_none: ZrequestWhereInput
-  inbox_every: OfferWhereInput
-  inbox_some: OfferWhereInput
-  inbox_none: OfferWhereInput
+  inbox_every: ZofferWhereInput
+  inbox_some: ZofferWhereInput
+  inbox_none: ZofferWhereInput
   _MagicalBackRelation_ZsellerToZuser_every: ZsellerWhereInput
   _MagicalBackRelation_ZsellerToZuser_some: ZsellerWhereInput
   _MagicalBackRelation_ZsellerToZuser_none: ZsellerWhereInput
