@@ -1,22 +1,7 @@
-# import Post, Offer from "./generated/prisma.graphql"
-# import OfferWhereInput, OfferOrderByInput from "./generated/prisma.graphql"
-# import OfferWhereUniqueInput from "./generated/prisma.graphql"
-# import Query.offersConnection from "./generated/prisma.graphql"
-# import Query.zoffers from "./generated/prisma.graphql"
-# import Query.zsellers from "./generated/prisma.graphql"
-# import Mutation.createZoffer from "./generated/prisma.graphql"
-# import Mutation.deleteZoffer from "./generated/prisma.graphql"
-# import Mutation.deleteZoffer from "./generated/prisma.graphql"
-# import Mutation.createZseller from "./generated/prisma.graphql"
-# import Mutation.deleteZseller from "./generated/prisma.graphql"
+# import User from "./generated/prisma.graphql"
 
 type Query {
-  offers(where: OfferWhereInput, orderBy: OfferOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Offer]!
-  feed: [Post!]!
-  drafts: [Post!]!
-  post(id: ID!): Post
   me: User
-  offer(id: ID!): Offer
 }
 
 type RefreshTokenPayload {
@@ -28,16 +13,9 @@ type Mutation {
   refreshToken: RefreshTokenPayload!
   signup(email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): LoginResponse!
-  createDraft(title: String!, text: String!): Post!
-  publish(id: ID!): Post!
-  deletePost(id: ID!): Post!
   createOffer(title: String!, text: String!): Offer!
   deleteOffer(where: OfferWhereUniqueInput!): Offer
   updateOffer(id: ID!, title: String, text: String): Offer
-}
-
-type Subscription {
-  feedSubscription: PostSubscriptionPayload!
 }
 
 type AuthPayload {
@@ -53,11 +31,4 @@ type LoginResponse {
 type Error {
   field: String!
   msg: String!
-}
-
-type User {
-  id: ID!
-  email: String!
-  name: String!
-  posts: [Post!]!
 }

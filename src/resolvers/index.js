@@ -1,21 +1,20 @@
-const { Query } = require('./Query')
-const { Subscription } = require('./Subscription')
 const { auth } = require('./Mutation/auth')
-const { post } = require('./Mutation/post')
+const { friendship } = require('./Mutation/friendship')
 const { offer } = require('./Mutation/offer')
+const { request } = require('./Mutation/request')
+const { seller } = require('./Mutation/seller')
+
 const { AuthPayload } = require('./AuthPayload')
-const { zoffer } = require('./Mutation/zoffer')
-const { zseller } = require('./Mutation/zseller')
+const { Query } = require('./Query')
 
 module.exports = {
   Query,
   Mutation: {
     ...auth,
-    ...post,
+    ...friendship,
     ...offer,
-    ...zoffer,
-    ...zseller,
+    ...request,
+    ...seller,
   },
-  Subscription,
   AuthPayload,
 }

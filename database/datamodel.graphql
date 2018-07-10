@@ -1,81 +1,52 @@
-type Post {
+type User {
   id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
-  title: String!
-  text: String!
-  author: User!
-  isPublished: Boolean! @default(value: "false")
+  name: String!
+  email: String! @unique
+  about: String!
+  password: String!
+  friends: [Friendship!]!
+  interests: [String!]!
+  requests: [Request!]!
+  inbox: [Offer!]!
 }
 
 type Offer {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
-  title: String!
-  text: String!
-  author: User!
-}
-
-type User {
-  id: ID! @unique
-  email: String! @unique
-  password: String!
-  name: String!
-  posts: [Post!]!
-}
-
-
-type Zuser {
-  id: ID! @unique
-  name: String!
-  email: String! @unique
-  about: String!
-  password: String!
-  friends: [Zfriendship!]!
-  interests: [String!]!
-  requests: [Zrequest!]!
-  inbox: [Offer!]!
-}
-
-type Zoffer {
-  id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
   expiresAt: DateTime!
   title: String!
   text: String!
-  author: Zseller!
+  author: Seller!
 }
 
-type Zrequest {
-  to: Zseller!
+type Request {
+  to: Seller!
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
   wants: [String!]!
   title: String!
   text: String!
-  author: Zuser!
+  author: User!
   isPublished: Boolean! @default(value: "true")
 }
 
-type Zseller {
+type Seller {
+  identity: User!
   id: ID! @unique
   name: String!
   about: String!
-  email: String! @unique
-  password: String!
-  patrons: [Zuser!]!
+  patrons: [User!]!
   sells: [String!]!
-  inbox: [Zrequest!]!
+  inbox: [Request!]!
 }
 
-type Zfriendship {
+type Friendship {
   id: ID! @unique
   createdAt: DateTime!
   updatedAt: DateTime!
   friendsBecause: [String!]!
   offerAllowance: Int! @default(value: 0)
-  friend: Zseller!
+  friend: User!
 }

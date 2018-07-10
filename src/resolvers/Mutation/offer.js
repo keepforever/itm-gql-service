@@ -3,48 +3,13 @@ const { forwardTo } = require('prisma-binding')
 
 const offer = {
   deleteOffer: forwardTo("db"),
-  async updateOffer(parent, {title, text, id}, ctx, info ) {
-    //console.log("Id from offer.js, ", id)
-    const userId = getUserId(ctx)
-    const offer = await ctx.db.query.offer(
-      { where: { id }}, '{ __typename id text title author { name id } }'
-    )
-    //console.log('offer.author from offer.js', offer.author.id)
-    if (userId !== offer.author.id) {
-      throw new Error ("Error: you are not the author of this offer")
-    }
-    return ctx.db.mutation.updateOffer(
-      {
-        data: {
-          title,
-          text,
-        },
-        where: {
-          id
-        }
-      },
-      info
-    )
+  updateOffer: forwardTo("db"),
+  createZoffer: (parent, args, ctx, info) => {
+    //getUserId makes sure sender of requset has a valid token
+    //in the HTTP Headers thereby protecting the route
+    getUserId(ctx)
+    return forwardTo("db")(parent, args, ctx, info);
   },
-
-  async createOffer(parent, { title, text }, ctx, info) {
-    const userId = getUserId(ctx)
-    //console.log('offer.js, userId: ', userId)
-    return ctx.db.mutation.createOffer(
-      {
-        data: {
-          title,
-          text,
-          author: {
-            connect: { id: userId },
-          },
-        },
-      },
-      info
-    )
-  },
-
-
 }
 
 module.exports = { offer }
@@ -61,4 +26,45 @@ module.exports = { offer }
 //   }
 //
 //   return ctx.db.mutation.deleteOffer({ where: { id } })
+// },
+//
+// async updateOffer(parent, {title, text, id}, ctx, info ) {
+//   //console.log("Id from offer.js, ", id)
+//   const userId = getUserId(ctx)
+//   const offer = await ctx.db.query.offer(
+//     { where: { id }}, '{ __typename id text title author { name id } }'
+//   )
+//   //console.log('offer.author from offer.js', offer.author.id)
+//   if (userId !== offer.author.id) {
+//     throw new Error ("Error: you are not the author of this offer")
+//   }
+//   return ctx.db.mutation.updateOffer(
+//     {
+//       data: {
+//         title,
+//         text,
+//       },
+//       where: {
+//         id
+//       }
+//     },
+//     info
+//   )
+// },
+//
+// async createOffer(parent, { title, text }, ctx, info) {
+//   const userId = getUserId(ctx)
+//   //console.log('offer.js, userId: ', userId)
+//   return ctx.db.mutation.createOffer(
+//     {
+//       data: {
+//         title,
+//         text,
+//         author: {
+//           connect: { id: userId },
+//         },
+//       },
+//     },
+//     info
+//   )
 // },
