@@ -3,6 +3,7 @@
 now rm itm-adv-server --safe --yes
 ```
 #### Should run get-schema manually as it's not doing it automatically
+**make sure to be at root directory before running**
 ```sh
 graphql get-schema --project database
 ```
