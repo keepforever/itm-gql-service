@@ -11,7 +11,7 @@ const auth = {
   async refreshToken(parent, args, ctx, info) {
 
     const userId = getUserId(ctx)
-    console.log('Mutation/auth.js, userId = ', userId)
+    //console.log('Mutation/auth.js, userId = ', userId)
     //if no errors, we can sign our token
     return {
       token: createToken(userId),
@@ -69,21 +69,3 @@ const auth = {
 }
 
 module.exports = { auth }
-
-
-// function getUserId(ctx, jwtToken) {
-//   let token = null;
-//   if(jwtToken) {
-//     token = jwtToken
-//   } else {
-//     const Authorization = ctx.request.get('Authorization')
-//     token = Authorization.replace('Bearer ', '')
-//   }
-//
-//   if (token) {
-//     const { userId } = jwt.verify(token, process.env.APP_SECRET)
-//     return userId
-//   }
-//
-//   throw new AuthError()
-// }
