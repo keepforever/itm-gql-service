@@ -1,4 +1,24 @@
-# import User from "./generated/prisma.graphql"
+# import User, Request, Offer from "./generated/prisma.graphql"
+# import Request, Seller, Friendship from "./generated/prisma.graphql"
+
+# import Query.sellers from "./generated/prisma.graphql"
+# import Query.offers from "./generated/prisma.graphql"
+
+# import Mutation.deleteFriendship from "./generated/prisma.graphql"
+# import Mutation.updateFriendship from "./generated/prisma.graphql"
+# import Mutation.createFriendship from "./generated/prisma.graphql"
+
+# import Mutation.createOffer from "./generated/prisma.graphql"
+# import Mutation.updateOffer from "./generated/prisma.graphql"
+# import Mutation.deleteOffer from "./generated/prisma.graphql"
+
+# import Mutation.createRequest from "./generated/prisma.graphql"
+# import Mutation.updateRequest from "./generated/prisma.graphql"
+# import Mutation.deleteRequest from "./generated/prisma.graphql"
+
+# import Mutation.createSeller from "./generated/prisma.graphql"
+# import Mutation.updateSeller from "./generated/prisma.graphql"
+# import Mutation.deleteSeller from "./generated/prisma.graphql"
 
 type Query {
   me: User
@@ -11,11 +31,8 @@ type RefreshTokenPayload {
 
 type Mutation {
   refreshToken: RefreshTokenPayload!
-  signup(email: String!, password: String!, name: String!): AuthPayload!
+  signup(about: String!, email: String!, password: String!, name: String!): AuthPayload!
   login(email: String!, password: String!): LoginResponse!
-  createOffer(title: String!, text: String!): Offer!
-  deleteOffer(where: OfferWhereUniqueInput!): Offer
-  updateOffer(id: ID!, title: String, text: String): Offer
 }
 
 type AuthPayload {

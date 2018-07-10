@@ -1,3 +1,56 @@
+Temporary code snippits, to be deleated: 
+```
+mutation qCreateSeller {
+  createSeller(data:{
+    patrons:{connect:{id: "cjjgby7gjd7b00b37sjyeo26q"}},
+    name: "Seller Dad",
+    sells:{set:["condy", "tacos", "buttsex"]},
+    identity:{connect:{id:"cjjgca7eld7x90b379dxoyeze"}},
+    about:"About Seller Dad"
+  }) {
+    id
+    about
+    name
+    patrons{
+      name
+    }
+  }
+}
+
+mutation qCreateUser {
+  signup(
+    email: "dad@dad.com",
+    password:"daddad",
+    name:"dad",
+    about:"about your dad"
+  ) {
+    token
+    user{
+      id
+      name
+      about
+    }
+  }
+}
+
+mutation qCreateSecondUser {
+  signup(
+    email: "mom@mom.com",
+    password:"mom",
+    name:"mommom",
+    about:"about your mom"
+  ) {
+    token
+    user{
+      id
+      name
+      about
+    }
+  }
+}
+```
+
+
 #### To remove old deployment; limited free tier cleanup
 ```sh
 now rm itm-adv-server --safe --yes

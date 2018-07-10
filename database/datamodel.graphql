@@ -33,7 +33,7 @@ type Request {
 }
 
 type Seller {
-  identity: User! @relation(name: "SellerIdentityRelation")
+  identity: User! @unique   @relation(name: "SellerIdentityRelation")
   id: ID! @unique
   name: String!
   about: String!

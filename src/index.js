@@ -18,4 +18,12 @@ const server = new GraphQLServer({
 // must install express and import with 'require' syntax
 // server.express.use("/images", express.static("images"));
 
-server.start(() => console.log('Server is running on http://localhost:4000'))
+server.start(() => console.log(`
+
+##################################################
+##                                              ##
+##  Server is running on http://localhost:4000  ##
+##                                              ##
+##################################################
+
+`))

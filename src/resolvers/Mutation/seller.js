@@ -2,8 +2,9 @@ const { getUserId } = require('../../utils')
 const { forwardTo } = require('prisma-binding')
 
 const seller = {
-  deleteZseller: forwardTo("db"),
-  createZseller: (parent, args, ctx, info) => {
+  updateSeller: forwardTo("db"),
+  deleteSeller: forwardTo("db"),
+  createSeller: (parent, args, ctx, info) => {
     //getUserId makes sure sender of requset has a valid token
     //in the HTTP Headers thereby protecting the route
     getUserId(ctx)
