@@ -1,5 +1,5 @@
 # source: https://us1.prisma.sh/brian-cilenti-1f9206/itm-alpha/dev
-# timestamp: Tue Jul 10 2018 16:08:28 GMT-0700 (Pacific Daylight Time)
+# timestamp: Wed Jul 11 2018 15:45:02 GMT-0700 (Pacific Daylight Time)
 
 type AggregateFriendship {
   count: Int!
@@ -34,7 +34,7 @@ type Friendship implements Node {
   updatedAt: DateTime!
   friendsBecause: [String!]!
   offerAllowance: Int!
-  friend(where: UserWhereInput): User!
+  friend(where: SellerWhereInput): Seller!
 }
 
 """A connection to a list of items."""
@@ -54,17 +54,12 @@ input FriendshipCreatefriendsBecauseInput {
 input FriendshipCreateInput {
   offerAllowance: Int
   friendsBecause: FriendshipCreatefriendsBecauseInput
-  friend: UserCreateOneWithoutFriendsInput!
+  friend: SellerCreateOneInput!
 }
 
-input FriendshipCreateManyWithoutFriendInput {
-  create: [FriendshipCreateWithoutFriendInput!]
+input FriendshipCreateManyInput {
+  create: [FriendshipCreateInput!]
   connect: [FriendshipWhereUniqueInput!]
-}
-
-input FriendshipCreateWithoutFriendInput {
-  offerAllowance: Int
-  friendsBecause: FriendshipCreatefriendsBecauseInput
 }
 
 """An edge in a connection."""
@@ -134,6 +129,12 @@ input FriendshipSubscriptionWhereInput {
   node: FriendshipWhereInput
 }
 
+input FriendshipUpdateDataInput {
+  offerAllowance: Int
+  friendsBecause: FriendshipUpdatefriendsBecauseInput
+  friend: SellerUpdateOneInput
+}
+
 input FriendshipUpdatefriendsBecauseInput {
   set: [String!]
 }
@@ -141,32 +142,27 @@ input FriendshipUpdatefriendsBecauseInput {
 input FriendshipUpdateInput {
   offerAllowance: Int
   friendsBecause: FriendshipUpdatefriendsBecauseInput
-  friend: UserUpdateOneWithoutFriendsInput
+  friend: SellerUpdateOneInput
 }
 
-input FriendshipUpdateManyWithoutFriendInput {
-  create: [FriendshipCreateWithoutFriendInput!]
+input FriendshipUpdateManyInput {
+  create: [FriendshipCreateInput!]
   connect: [FriendshipWhereUniqueInput!]
   disconnect: [FriendshipWhereUniqueInput!]
   delete: [FriendshipWhereUniqueInput!]
-  update: [FriendshipUpdateWithWhereUniqueWithoutFriendInput!]
-  upsert: [FriendshipUpsertWithWhereUniqueWithoutFriendInput!]
+  update: [FriendshipUpdateWithWhereUniqueNestedInput!]
+  upsert: [FriendshipUpsertWithWhereUniqueNestedInput!]
 }
 
-input FriendshipUpdateWithoutFriendDataInput {
-  offerAllowance: Int
-  friendsBecause: FriendshipUpdatefriendsBecauseInput
-}
-
-input FriendshipUpdateWithWhereUniqueWithoutFriendInput {
+input FriendshipUpdateWithWhereUniqueNestedInput {
   where: FriendshipWhereUniqueInput!
-  data: FriendshipUpdateWithoutFriendDataInput!
+  data: FriendshipUpdateDataInput!
 }
 
-input FriendshipUpsertWithWhereUniqueWithoutFriendInput {
+input FriendshipUpsertWithWhereUniqueNestedInput {
   where: FriendshipWhereUniqueInput!
-  update: FriendshipUpdateWithoutFriendDataInput!
-  create: FriendshipCreateWithoutFriendInput!
+  update: FriendshipUpdateDataInput!
+  create: FriendshipCreateInput!
 }
 
 input FriendshipWhereInput {
@@ -284,7 +280,10 @@ input FriendshipWhereInput {
 
   """All values greater than or equal the given value."""
   offerAllowance_gte: Int
-  friend: UserWhereInput
+  friend: SellerWhereInput
+  _MagicalBackRelation_FriendshipToUser_every: UserWhereInput
+  _MagicalBackRelation_FriendshipToUser_some: UserWhereInput
+  _MagicalBackRelation_FriendshipToUser_none: UserWhereInput
 }
 
 input FriendshipWhereUniqueInput {
@@ -725,15 +724,15 @@ type Query {
 }
 
 type Request implements Node {
-  to(where: SellerWhereInput): Seller!
   id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  to(where: SellerWhereInput): Seller!
+  author(where: UserWhereInput): User!
   wants: [String!]!
   title: String!
   text: String!
-  author(where: UserWhereInput): User!
   isPublished: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 """A connection to a list of items."""
@@ -797,26 +796,26 @@ type RequestEdge {
 enum RequestOrderByInput {
   id_ASC
   id_DESC
-  createdAt_ASC
-  createdAt_DESC
-  updatedAt_ASC
-  updatedAt_DESC
   title_ASC
   title_DESC
   text_ASC
   text_DESC
   isPublished_ASC
   isPublished_DESC
+  createdAt_ASC
+  createdAt_DESC
+  updatedAt_ASC
+  updatedAt_DESC
 }
 
 type RequestPreviousValues {
   id: ID!
-  createdAt: DateTime!
-  updatedAt: DateTime!
   wants: [String!]!
   title: String!
   text: String!
   isPublished: Boolean!
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type RequestSubscriptionPayload {
@@ -976,50 +975,6 @@ input RequestWhereInput {
 
   """All values not ending with the given string."""
   id_not_ends_with: ID
-  createdAt: DateTime
-
-  """All values that are not equal to given value."""
-  createdAt_not: DateTime
-
-  """All values that are contained in given list."""
-  createdAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  createdAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  createdAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  createdAt_lte: DateTime
-
-  """All values greater than the given value."""
-  createdAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  createdAt_gte: DateTime
-  updatedAt: DateTime
-
-  """All values that are not equal to given value."""
-  updatedAt_not: DateTime
-
-  """All values that are contained in given list."""
-  updatedAt_in: [DateTime!]
-
-  """All values that are not contained in given list."""
-  updatedAt_not_in: [DateTime!]
-
-  """All values less than the given value."""
-  updatedAt_lt: DateTime
-
-  """All values less than or equal the given value."""
-  updatedAt_lte: DateTime
-
-  """All values greater than the given value."""
-  updatedAt_gt: DateTime
-
-  """All values greater than or equal the given value."""
-  updatedAt_gte: DateTime
   title: String
 
   """All values that are not equal to given value."""
@@ -1104,6 +1059,50 @@ input RequestWhereInput {
 
   """All values that are not equal to given value."""
   isPublished_not: Boolean
+  createdAt: DateTime
+
+  """All values that are not equal to given value."""
+  createdAt_not: DateTime
+
+  """All values that are contained in given list."""
+  createdAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  createdAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  createdAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  createdAt_lte: DateTime
+
+  """All values greater than the given value."""
+  createdAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  createdAt_gte: DateTime
+  updatedAt: DateTime
+
+  """All values that are not equal to given value."""
+  updatedAt_not: DateTime
+
+  """All values that are contained in given list."""
+  updatedAt_in: [DateTime!]
+
+  """All values that are not contained in given list."""
+  updatedAt_not_in: [DateTime!]
+
+  """All values less than the given value."""
+  updatedAt_lt: DateTime
+
+  """All values less than or equal the given value."""
+  updatedAt_lte: DateTime
+
+  """All values greater than the given value."""
+  updatedAt_gt: DateTime
+
+  """All values greater than or equal the given value."""
+  updatedAt_gte: DateTime
   to: SellerWhereInput
   author: UserWhereInput
 }
@@ -1423,6 +1422,9 @@ input SellerWhereInput {
   inbox_every: RequestWhereInput
   inbox_some: RequestWhereInput
   inbox_none: RequestWhereInput
+  _MagicalBackRelation_FriendshipToSeller_every: FriendshipWhereInput
+  _MagicalBackRelation_FriendshipToSeller_some: FriendshipWhereInput
+  _MagicalBackRelation_FriendshipToSeller_none: FriendshipWhereInput
   _MagicalBackRelation_OfferToSeller_every: OfferWhereInput
   _MagicalBackRelation_OfferToSeller_some: OfferWhereInput
   _MagicalBackRelation_OfferToSeller_none: OfferWhereInput
@@ -1468,7 +1470,7 @@ input UserCreateInput {
   about: String!
   password: String!
   interests: UserCreateinterestsInput
-  friends: FriendshipCreateManyWithoutFriendInput
+  friends: FriendshipCreateManyInput
   requests: RequestCreateManyWithoutAuthorInput
   inbox: OfferCreateManyInput
 }
@@ -1487,24 +1489,9 @@ input UserCreateOneInput {
   connect: UserWhereUniqueInput
 }
 
-input UserCreateOneWithoutFriendsInput {
-  create: UserCreateWithoutFriendsInput
-  connect: UserWhereUniqueInput
-}
-
 input UserCreateOneWithoutRequestsInput {
   create: UserCreateWithoutRequestsInput
   connect: UserWhereUniqueInput
-}
-
-input UserCreateWithoutFriendsInput {
-  name: String!
-  email: String!
-  about: String!
-  password: String!
-  interests: UserCreateinterestsInput
-  requests: RequestCreateManyWithoutAuthorInput
-  inbox: OfferCreateManyInput
 }
 
 input UserCreateWithoutRequestsInput {
@@ -1513,7 +1500,7 @@ input UserCreateWithoutRequestsInput {
   about: String!
   password: String!
   interests: UserCreateinterestsInput
-  friends: FriendshipCreateManyWithoutFriendInput
+  friends: FriendshipCreateManyInput
   inbox: OfferCreateManyInput
 }
 
@@ -1597,7 +1584,7 @@ input UserUpdateDataInput {
   about: String
   password: String
   interests: UserUpdateinterestsInput
-  friends: FriendshipUpdateManyWithoutFriendInput
+  friends: FriendshipUpdateManyInput
   requests: RequestUpdateManyWithoutAuthorInput
   inbox: OfferUpdateManyInput
 }
@@ -1608,7 +1595,7 @@ input UserUpdateInput {
   about: String
   password: String
   interests: UserUpdateinterestsInput
-  friends: FriendshipUpdateManyWithoutFriendInput
+  friends: FriendshipUpdateManyInput
   requests: RequestUpdateManyWithoutAuthorInput
   inbox: OfferUpdateManyInput
 }
@@ -1634,14 +1621,6 @@ input UserUpdateOneInput {
   upsert: UserUpsertNestedInput
 }
 
-input UserUpdateOneWithoutFriendsInput {
-  create: UserCreateWithoutFriendsInput
-  connect: UserWhereUniqueInput
-  delete: Boolean
-  update: UserUpdateWithoutFriendsDataInput
-  upsert: UserUpsertWithoutFriendsInput
-}
-
 input UserUpdateOneWithoutRequestsInput {
   create: UserCreateWithoutRequestsInput
   connect: UserWhereUniqueInput
@@ -1650,23 +1629,13 @@ input UserUpdateOneWithoutRequestsInput {
   upsert: UserUpsertWithoutRequestsInput
 }
 
-input UserUpdateWithoutFriendsDataInput {
-  name: String
-  email: String
-  about: String
-  password: String
-  interests: UserUpdateinterestsInput
-  requests: RequestUpdateManyWithoutAuthorInput
-  inbox: OfferUpdateManyInput
-}
-
 input UserUpdateWithoutRequestsDataInput {
   name: String
   email: String
   about: String
   password: String
   interests: UserUpdateinterestsInput
-  friends: FriendshipUpdateManyWithoutFriendInput
+  friends: FriendshipUpdateManyInput
   inbox: OfferUpdateManyInput
 }
 
@@ -1678,11 +1647,6 @@ input UserUpdateWithWhereUniqueNestedInput {
 input UserUpsertNestedInput {
   update: UserUpdateDataInput!
   create: UserCreateInput!
-}
-
-input UserUpsertWithoutFriendsInput {
-  update: UserUpdateWithoutFriendsDataInput!
-  create: UserCreateWithoutFriendsInput!
 }
 
 input UserUpsertWithoutRequestsInput {

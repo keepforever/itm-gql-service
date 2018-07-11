@@ -48,5 +48,5 @@ type Friendship {
   updatedAt: DateTime!
   friendsBecause: [String!]!
   offerAllowance: Int! @default(value: 0)
-  friend: User!
+  friend: Seller!
 }
