@@ -21,15 +21,15 @@ type Offer {
 }
 
 type Request {
-  to: Seller!
   id: ID! @unique
-  createdAt: DateTime!
-  updatedAt: DateTime!
+  to: Seller!
+  author: User!
   wants: [String!]!
   title: String!
   text: String!
-  author: User!
   isPublished: Boolean! @default(value: "true")
+  createdAt: DateTime!
+  updatedAt: DateTime!
 }
 
 type Seller {
