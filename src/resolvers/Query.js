@@ -19,6 +19,10 @@ const Query = {
     getUserId(ctx)
     return forwardTo("db")(parent, args, ctx, info);
   },
+  offersConnection: (parent, args, ctx, info) => {
+    getUserId(ctx)
+    return forwardTo("db")(parent, args, ctx, info);
+  },
 }
 
 module.exports = { Query }
