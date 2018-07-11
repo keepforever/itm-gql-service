@@ -22,11 +22,13 @@ function clearLog(text, item) {
   
 
   ########################################
-              ${text}
+                  ${text}
   ########################################
   
   
-  `, item)
+  `, item, `
+  
+  `)
 }
 
 function createToken(userId) {
