@@ -4,6 +4,7 @@
 # import Query.sellers from "./generated/prisma.graphql"
 # import Query.offers from "./generated/prisma.graphql"
 # import Query.users from "./generated/prisma.graphql"
+# import Query.offersConnection from "./generated/prisma.graphql"
 
 # import Mutation.deleteFriendship from "./generated/prisma.graphql"
 # import Mutation.updateFriendship from "./generated/prisma.graphql"
