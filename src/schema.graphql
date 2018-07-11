@@ -3,6 +3,7 @@
 
 # import Query.sellers from "./generated/prisma.graphql"
 # import Query.offers from "./generated/prisma.graphql"
+# import Query.users from "./generated/prisma.graphql"
 
 # import Mutation.deleteFriendship from "./generated/prisma.graphql"
 # import Mutation.updateFriendship from "./generated/prisma.graphql"
@@ -19,6 +20,11 @@
 # import Mutation.createSeller from "./generated/prisma.graphql"
 # import Mutation.updateSeller from "./generated/prisma.graphql"
 # import Mutation.deleteSeller from "./generated/prisma.graphql"
+
+# import Mutation.createUser from "./generated/prisma.graphql"
+# import Mutation.updateUser from "./generated/prisma.graphql"
+# import Mutation.deleteUser from "./generated/prisma.graphql"
+
 
 type Query {
   me: User

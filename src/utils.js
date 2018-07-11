@@ -17,6 +17,18 @@ function getUserId(ctx, jwtToken) {
   throw new AuthError()
 }
 
+function clearLog(text, item) {
+  console.log(`
+  
+
+  ########################################
+              ${text}
+  ########################################
+  
+  
+  `, item)
+}
+
 function createToken(userId) {
   jwt.sign({ userId, expiresIn: "7d" }, process.env.APP_SECRET)
 }
@@ -29,5 +41,6 @@ class AuthError extends Error {
 
 module.exports = {
   getUserId,
-  AuthError
+  AuthError,
+  clearLog
 }
